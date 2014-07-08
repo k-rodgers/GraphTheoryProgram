@@ -9,14 +9,15 @@ class Node;
 
 class CompleteGraph {
 public:
-	CompleteGraph(int, int, int, bool, int);
+	CompleteGraph(int, int, int, bool, int, bool);
 	virtual ~CompleteGraph();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
 	void printVersion();
 	void print();
-	void game();
+	void logicalGame();
+    void randomGame();
 	//std::vector<std::string> player1;
 	//std::vector<std::string> player2;
 	//void analysis(int);
@@ -32,6 +33,7 @@ private:
 	void rotateBar();
 	bool watch;
 	int barCount;
+    bool random;
 	std::list<Node*> nodeList;
 	
 };

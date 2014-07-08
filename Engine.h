@@ -15,7 +15,7 @@ private:
 	void printIntro();
 	void printStartMenu();
 	void startMenuChoices(int);
-	void createPetersenGraph(int, int, std::string);
+	void createPetersenGraph(int, int, bool, bool);
 	void rotateBarParse();
 	void rotateBarParsePlayer1();
 	void rotateBarParsePlayer2();
@@ -24,8 +24,8 @@ private:
 	int barCount;
 	int barCount1;
 	int barCount2;
-	void createCompleteGraph(int, int, int, std::string);
-	void createHypercubeGraph(int, int, int, std::string);
+	void createCompleteGraph(int, int, int, bool, bool);
+	void createHypercubeGraph(int, int, int, bool, bool);
 	void parseMasterData();
 	void parsePlayerLogicalData();
 	void dataAnalysis(int);

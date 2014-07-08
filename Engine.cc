@@ -53,29 +53,66 @@ void Engine::printStartMenu()
 
 void Engine::startMenuChoices(int choice)
 {
-	int numGamesToPlay = 0;
+	int subMenuChoice = 0;
+    int numGamesToPlay = 0;
 	int numNodes = 0;
 	int edgeWeight = 0;
-	std::string watch;
+    bool random;
+    bool watch;
+	std::string watchChoice;
 	if (choice == 1)
 	{
 		std::cout << "\nPetersen Graph" << std::endl;
-		std::cout << "What weight would you like to assign the edges?: ";
-//		std::cout << "\tNode: Type 0 for random." << std::endl;
-//		std::cout << "What weight? ";
-		std::cin >> edgeWeight;
-		std::cout << "How many games would you like to play?: ";
-		std::cin >> numGamesToPlay;
-		std::cout << "Would you like to view the games as they are being played?" << std::endl;
-		std::cout << "\tNote: If running more than 10 million games, or \n\tif you want a cleaner terminal, 'n' recommended." << std::endl;
-		std::cout << "Watch games? (y/n): ";
-		std::cin >> watch;
-		std::cout << std::endl;
-		createPetersenGraph(numGamesToPlay, edgeWeight, watch);
+        std::cout << "What type of game would you like to play?" << std::endl;
+        std::cout << "1. Random Game" << std::endl;
+        std::cout << "2. Logical Game" << std::endl;
+        std::cout << "Please enter your choice: ";
+        std::cin >> subMenuChoice;
+        if (subMenuChoice == 1)
+        {
+            std::cout << "\nRandom Petersen Graph" << std::endl;
+            random = true;
+        }
+        else if (subMenuChoice == 2)
+        {
+            std::cout << "\nLogical Petersen Graph" << std::endl;
+            random = false;
+        }
+        std::cout << "What weight would you like to assign the edges?: ";
+        //		std::cout << "\tNode: Type 0 for random." << std::endl;
+        //		std::cout << "What weight? ";
+        std::cin >> edgeWeight;
+        std::cout << "How many games would you like to play?: ";
+        std::cin >> numGamesToPlay;
+        std::cout << "Would you like to view the games as they are being played?" << std::endl;
+        std::cout << "\tNote: If running more than 10 million games, or \n\tif you want a cleaner terminal, 'n' recommended." << std::endl;
+        std::cout << "Watch games? (y/n): ";
+        std::cin >> watchChoice;
+        std::cout << std::endl;
+        if (watchChoice == "y" || watchChoice == "Y")
+            watch = true;
+        else if (watchChoice == "n" || watchChoice == "N")
+            watch = false;
+        createPetersenGraph(numGamesToPlay, edgeWeight, watch, random);
 	}
 	else if (choice == 2)
 	{
-		std::cout << "\nComplete Graph" << std::endl;
+        std::cout << "\nComplete Graph" << std::endl;
+        std::cout << "What type of game would you like to play?" << std::endl;
+        std::cout << "1. Random Game" << std::endl;
+        std::cout << "2. Logical Game" << std::endl;
+        std::cout << "Please enter your choice: ";
+        std::cin >> subMenuChoice;
+        if (subMenuChoice == 1)
+        {
+            std::cout << "\nRandom Complete Graph" << std::endl;
+            random = true;
+        }
+        else if (subMenuChoice == 2)
+        {
+            std::cout << "\nLogical Complete Graph" << std::endl;
+            random = false;
+        }
 		std::cout << "How many nodes would you like in this graph?: ";
 		std::cin >> numNodes;
 		std::cout << "What weight would you like to assign the edges?: ";
@@ -87,14 +124,33 @@ void Engine::startMenuChoices(int choice)
 		std::cout << "Would you like to view the games being played?" << std::endl;
 		std::cout << "\tNote: If running over 150-200 nodes, and/or over 10 million games, or \n\tif you want a cleaner terminal, 'n' recommended." << std::endl;
 		std::cout << "Watch games? (y/n): ";
-		std::cin >> watch;
+		std::cin >> watchChoice;
 		std::cout << std::endl;
-		createCompleteGraph(numGamesToPlay, numNodes, edgeWeight, watch);
+        if (watchChoice == "y" || watchChoice == "Y")
+            watch = true;
+        else if (watchChoice == "n" || watchChoice == "N")
+            watch = false;
+		createCompleteGraph(numGamesToPlay, numNodes, edgeWeight, watch, random);
 	}
 	else if (choice == 3)
 	{
+        std::cout << "\nHypercube Graph" << std::endl;
+        std::cout << "What type of game would you like to play?" << std::endl;
+        std::cout << "1. Random Game" << std::endl;
+        std::cout << "2. Logical Game" << std::endl;
+        std::cout << "Please enter your choice: ";
+        std::cin >> subMenuChoice;
+        if (subMenuChoice == 1)
+        {
+            std::cout << "\nRandom Hypercube Graph" << std::endl;
+            random = true;
+        }
+        else if (subMenuChoice == 2)
+        {
+            std::cout << "\nLogical Hypercube Graph" << std::endl;
+            random = false;
+        }
 		int dimension = 0;
-		std::cout << "\nHypercube Graph" << std::endl;
 		std::cout << "What dimension would you like this graph to be? (2-4): ";
 		std::cin >> dimension;
 		std::cout << "What weight would you like to assign the edges?: ";
@@ -106,9 +162,13 @@ void Engine::startMenuChoices(int choice)
 		std::cout << "Would you like to view the games being played?" << std::endl;
 		std::cout << "\tNote: If running over 150-200 nodes, and/or over 10 million games, or \n\tif you want a cleaner terminal, 'n' recommended." << std::endl;
 		std::cout << "Watch games? (y/n): ";
-		std::cin >> watch;
+		std::cin >> watchChoice;
 		std::cout << std::endl;
-		createHypercubeGraph(numGamesToPlay, edgeWeight, dimension, watch);
+        if (watchChoice == "y" || watchChoice == "Y")
+            watch = true;
+        else if (watchChoice == "n" || watchChoice == "N")
+            watch = false;
+		createHypercubeGraph(numGamesToPlay, edgeWeight, dimension, watch, random);
 	}	
     else if (choice == 9)
     {
@@ -415,22 +475,15 @@ void Engine::rotateBarAnalyzeP2()
 	return;
 }
 
-void Engine::createPetersenGraph(int choice, int edgeWeight, std::string watch)
+void Engine::createPetersenGraph(int choice, int edgeWeight, bool watch, bool random)
 {
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << choice << std::endl;
-	if (watch == "y" || watch == "Y")
-		for (int i = 1; i <= choice; i++)
-		{
-			PetersenGraph *a = new PetersenGraph(i, edgeWeight, true, choice);
-			delete a;
-		}
-	else if (watch == "n" || watch == "N")
-		for (int i = 1 ; i <= choice; i++)
-		{
-			PetersenGraph *a = new PetersenGraph(i, edgeWeight, false, choice);
-			delete a;
-		}
+    for (int i = 1; i <= choice; i++)
+    {
+        PetersenGraph *a = new PetersenGraph(i, edgeWeight, watch, choice, random);
+        delete a;
+    }
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
 	dataAnalysis(choice);
@@ -462,24 +515,17 @@ void Engine::createPetersenGraph(int choice, int edgeWeight, std::string watch)
 	std::cout << std::endl;
 }
 
-void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, std::string watch)
+void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, bool watch, bool random)
 {
 	//int numberOfNodes = numNodes;
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << numGames << std::endl;
-	if (watch == "y" || watch == "Y")
-		for (int i = 1; i <= numGames; i++)
-		{
-			CompleteGraph *a = new CompleteGraph(i, numNodes, edgeWeight, true, numGames);
-			delete a;
-		}
-	else if (watch == "n" || watch == "N")
-		for (int i = 1 ; i <= numGames; i++)
-		{
-			CompleteGraph *a = new CompleteGraph(i, numNodes, edgeWeight, false, numGames);
-			delete a;
-		}
-	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
+    for (int i = 1; i <= numGames; i++)
+    {
+        CompleteGraph *a = new CompleteGraph(i, numNodes, edgeWeight, watch, numGames, random);
+        delete a;
+    }
+    std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
 	parsePlayerLogicalData();
 	dataAnalysis(numGames);
@@ -511,56 +557,29 @@ void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, std
 	std::cout << std::endl;
 }
 
-void Engine::createHypercubeGraph(int numGames, int edgeWeight, int dimensions, std::string watch)
+void Engine::createHypercubeGraph(int numGames, int edgeWeight, int dimensions, bool watch, bool random)
 {
 	//int numberOfNodes = numNodes;
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << numGames << std::endl;
 	if (dimensions == 2)
-    {
-        if (watch == "y" || watch == "Y")
-            for (int i = 1; i <= numGames; i++)
-            {
-                Hypercube2 *a = new Hypercube2(i, edgeWeight, true, numGames);
-                delete a;
-            }
-        else if (watch == "n" || watch == "N")
-            for (int i = 1 ; i <= numGames; i++)
-            {
-                Hypercube2 *a = new Hypercube2(i, edgeWeight, false, numGames);
-                delete a;
-            }
-    }
+        for (int i = 1; i <= numGames; i++)
+        {
+            Hypercube2 *a = new Hypercube2(i, edgeWeight, watch, numGames, random);
+            delete a;
+        }
     else if (dimensions == 3)
-    {
-        if (watch == "y" || watch == "Y")
-            for (int i = 1; i <= numGames; i++)
-            {
-                Hypercube3 *a = new Hypercube3(i, edgeWeight, true, numGames);
-                delete a;
-            }
-        else if (watch == "n" || watch == "N")
-            for (int i = 1 ; i <= numGames; i++)
-            {
-                Hypercube3 *a = new Hypercube3(i, edgeWeight, false, numGames);
-                delete a;
-            }
-    }
+        for (int i = 1; i <= numGames; i++)
+        {
+            Hypercube3 *a = new Hypercube3(i, edgeWeight, watch, numGames, random);
+            delete a;
+        }
     else if (dimensions == 4)
-    {
-        if (watch == "y" || watch == "Y")
-            for (int i = 1; i <= numGames; i++)
-            {
-                Hypercube4 *a = new Hypercube4(i, edgeWeight, true, numGames);
-                delete a;
-            }
-        else if (watch == "n" || watch == "N")
-            for (int i = 1 ; i <= numGames; i++)
-            {
-                Hypercube4 *a = new Hypercube4(i, edgeWeight, false, numGames);
-                delete a;
-            }
-    }
+        for (int i = 1; i <= numGames; i++)
+        {
+            Hypercube4 *a = new Hypercube4(i, edgeWeight, watch, numGames, random);
+            delete a;
+        }
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
 	parsePlayerLogicalData();

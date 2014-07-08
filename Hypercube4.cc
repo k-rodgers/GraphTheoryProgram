@@ -25,7 +25,7 @@
 //Desc: Constructor for the Hypercube4 object. Constructs a Hypercube4 of Nodes,
 //		and creates edges between them.
 //Input: int i for the number of Nodes
-Hypercube4::Hypercube4(int i, int j, bool b, int k)
+Hypercube4::Hypercube4(int i, int j, bool b, int k, bool rand)
 {
 	gameNumber = i;
 	edgeWeight = j;
@@ -39,7 +39,10 @@ Hypercube4::Hypercube4(int i, int j, bool b, int k)
 	}
 	createInitialEdges();
 	std::ofstream master_data;
-	game();
+    if (random == true)
+        randomGame();
+    else
+        logicalGame();
 }
 //analysis(numGames);
 
@@ -315,7 +318,114 @@ int Hypercube4::getRandomEdge(int size)
 	return randNum;
 }
 
-void Hypercube4::game()
+void Hypercube4::randomGame()
+{
+    /*    std::cout << edgeWeight << std::endl;
+     for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
+     std::cout << (*iter)->getDegree() << std::endl;
+     */    std::ofstream master_data;
+	//master_data.open("logs/log.txt");
+	
+	
+	//std::string moves;
+    //	std::string gameName = std::to_string(i) + ".txt";
+	std::string master_data_path = "output_data/master_data.txt";
+	
+    //	master_data.open(path+gameName);
+	master_data.open(master_data_path, std::ios_base::app);
+	std::list<Node*>::iterator iter1 = nodeList.begin();
+	Node* nextMoveNode;
+	Token* t = new Token(*iter1);
+	int nextRandomWeight = 0;
+	int edgeSize = 0;
+	int nextMove = 0;
+	if (watch == true)
+	{
+		std::cout << "Game " << gameNumber << std::endl;
+		std::cout << std::endl;
+		master_data << (t->getTokenLocation())->getName() << "-";
+		while (true)
+		{
+            nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize());
+            nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);
+	        edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
+            nextRandomWeight = getRandomEdge(edgeSize);
+            if (nextRandomWeight == 0)
+		    {
+		    	t->getTokenLocation()->destroyEdge(nextMoveNode);
+	    		nextMoveNode->destroyEdge(t->getTokenLocation());
+		    }
+            else if (nextRandomWeight > 0)
+        	{
+        		master_data << nextRandomWeight << "-";
+        		(t->getTokenLocation())->setEdge(nextMoveNode, nextMoveNode->getWeight(t->getTokenLocation()) - nextRandomWeight);
+		        (nextMoveNode)->setEdge(t->getTokenLocation(), t->getTokenLocation()->getWeight(nextMoveNode) - nextRandomWeight);
+    		    std::cout << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
+	    	    //master_data << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << (nextMoveNode)->getName() << std::endl;
+    	    	t->setPlayerTurn();
+		        t->setTokenLocation(nextMoveNode);
+		        master_data << (t->getTokenLocation())->getName() << "-";
+		    }
+    	    if (t->getTokenLocation()->getEdgeListSize() == 0)
+			{
+				//moves += std::to_string((t->getTokenLocation())->getName());
+				t->setPlayerTurn();
+				std::cout << std::endl;
+				//master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
+				master_data << t->getCurrentPlayerTurn() << std::endl;
+				std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
+				std::cout << std::endl;
+                delete t;
+				break;
+			}
+		}
+	}
+	else
+	{
+		master_data << (t->getTokenLocation())->getName() << "-";
+		while (true)
+		{
+			rotateBar();
+            for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
+                (*iter)->setDegree();
+            //            for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
+            //                std::cout << "Node: " << (*iter)->getName() << " Degree: " << (*iter)->getDegree() << std::endl;
+            nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize());
+            nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);
+            edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
+        	nextRandomWeight = getRandomEdge(edgeSize);
+            if (nextRandomWeight > 0)
+    	    {
+    	    	master_data << nextRandomWeight << "-";
+        		(t->getTokenLocation())->removeEdgeWeight(nextMoveNode, nextRandomWeight);
+	        	(nextMoveNode)->removeEdgeWeight(t->getTokenLocation(), nextRandomWeight);
+    		    t->setPlayerTurn();
+	        	t->setTokenLocation(nextMoveNode);
+       			master_data << (t->getTokenLocation())->getName() << "-";
+	    	}
+            /*            else if (nextRandomWeight == 0)
+             {
+             t->getTokenLocation()->destroyEdge(nextMoveNode);
+             nextMoveNode->destroyEdge(t->getTokenLocation());
+             }
+             */    	    if (t->getTokenLocation()->getEdgeListSize() == 0)
+             {
+                 //moves += std::to_string((t->getTokenLocation())->getName());
+                 t->setPlayerTurn();
+                 //				std::cout << std::endl;
+                 //master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
+                 master_data << t->getCurrentPlayerTurn() << std::endl;
+                 //				std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
+                 //				std::cout << std::endl;
+                 delete t;
+                 break;
+             }
+        }
+        master_data.close();
+    }
+}
+
+void Hypercube4::logicalGame()
 {
     /*    std::cout << edgeWeight << std::endl;
      for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
@@ -352,7 +462,6 @@ void Hypercube4::game()
                 nextMoveNode = t->getTokenLocation()->getMinimalDegreeNode();     // sets node at based in this number
 	        edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
             nextRandomWeight = getRandomEdge(edgeSize);
-            nextRandomWeight = 1;
             if (nextRandomWeight == 0)
 		    {
 		    	t->getTokenLocation()->destroyEdge(nextMoveNode);
@@ -432,41 +541,3 @@ void Hypercube4::game()
         master_data.close();
     }
 }
-
-/*
- 
- while (true)
- {
- nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize()); // inside () returns an int the size of possible nodes to go to
- nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);     // sets node at based in this number
- edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
- nextRandomWeight = getRandomEdge(edgeSize);
- if (nextRandomWeight > 0)
- {
- (t->getTokenLocation())->setEdge(nextMoveNode, nextMoveNode->getWeight(t->getTokenLocation()) - nextRandomWeight);
- (nextMoveNode)->setEdge(t->getTokenLocation(), t->getTokenLocation()->getWeight(nextMoveNode) - nextRandomWeight);
- std::cout << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
- //master_data << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << (nextMoveNode)->getName() << std::endl;
- t->setPlayerTurn();
- t->setTokenLocation(nextMoveNode);
- }
- else if (nextRandomWeight == 0)
- {
- t->getTokenLocation()->destroyEdge(nextMoveNode);
- nextMoveNode->destroyEdge(t->getTokenLocation());
- }
- if (t->getTokenLocation()->getEdgeListSize() == 0)
- {
- //moves += std::to_string((t->getTokenLocation())->getName());
- t->setPlayerTurn();
- std::cout << std::endl;
- //master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
- master_data << t->getCurrentPlayerTurn() << std::endl;
- std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
- std::cout << std::endl;
- break;
- }
- master_data << (t->getTokenLocation())->getName() << "-";
- }
- }
- */

@@ -12,14 +12,15 @@ class Node;
 
 class Hypercube2 {
 public:
-	Hypercube2(int, int, bool, int);
+	Hypercube2(int, int, bool, int, bool);
 	virtual ~Hypercube2();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
 	void printVersion();
 	void print();
-	void game();
+    void randomGame();
+	void logicalGame();
 	//std::vector<std::string> player1;
 	//std::vector<std::string> player2;
 	//void analysis(int);
@@ -34,6 +35,7 @@ private:
 	bool watch;
 	void rotateBar();
 	int barCount;
+    bool random;
 	std::list<Node*> nodeList;
 	
 };
