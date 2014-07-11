@@ -200,8 +200,9 @@ void Engine::parseMasterData()
 		if (*(iter) == '1')
 		{
 			p1size++;
-			parseLine.pop_back();
-			parseLine.pop_back();
+			parseLine = parseLine.substr(0, parseLine.size() - 2);
+            //parseLine.pop_back();
+			//parseLine.pop_back();
 			p1 << parseLine << std::endl;
 			if (parseLine.size() > longestGame)
 				longestGame = (int)parseLine.size();
@@ -209,8 +210,9 @@ void Engine::parseMasterData()
 		else if(*(iter) == '2')
 		{
 			p2size++;
-			parseLine.pop_back();
-			parseLine.pop_back();
+			parseLine = parseLine.substr(0, parseLine.size() - 2);
+            //parseLine.pop_back();
+			//parseLine.pop_back();
 			p2 << parseLine << std::endl;
 			if (parseLine.size() > longestGame)
 				longestGame = (int)parseLine.size();
