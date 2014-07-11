@@ -1,39 +1,37 @@
-#ifndef GUARD_PetersenGraph_h
-#define GUARD_PetersenGraph_h
+#ifndef GUARD_CompleteGraphRandom_h
+#define GUARD_CompleteGraphRandom_h
 
 #include <list>
 #include <vector>
 #include <string>
-//#include <boolean>
 
 class Node;
 
-class PetersenGraph {
+class CompleteGraphRandom {
 public:
-	PetersenGraph(int, int, bool, int, bool);
-	virtual ~PetersenGraph();
+	CompleteGraphRandom(int, int, int, bool, int);
+	virtual ~CompleteGraphRandom();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
 	void printVersion();
 	void print();
-	void randomGame();
-    void logicalGame();
+	void game();
 	//std::vector<std::string> player1;
 	//std::vector<std::string> player2;
 	//void analysis(int);
     int getRandomNumber(int);
     int getRandomEdge(int);
     int gameNumber;
+//    typedef pair<int, int> edgeweightNodeDegree;
     
 private:
 	int nodeNameCount; //Keeps track of what the name of the next Node will be
 	int edgeWeight;
 	int totalGames;
-	bool watch;
 	void rotateBar();
+	bool watch;
 	int barCount;
-    bool random;
 	std::list<Node*> nodeList;
 	
 };

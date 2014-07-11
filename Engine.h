@@ -1,7 +1,6 @@
 #ifndef GUARD_Engine_h
 #define GUARD_Engine_h
 
-#include "PetersenGraph.h"
 #include <string>
 
 class Engine {

@@ -1,13 +1,13 @@
 //
-//  Hypercube3.h
+//  Hypercube3Random.h
 //  CPPWeightedLogical
 //
 //  Created by Kyle Rodgers on 7/7/14.
 //  Copyright (c) 2014 KMRodgers. All rights reserved.
 //
 
-#ifndef GUARD_Hypercube3_h
-#define GUARD_Hypercube3_h
+#ifndef GUARD_Hypercube3Random_h
+#define GUARD_Hypercube3Random_h
 
 #include <list>
 #include <vector>
@@ -16,17 +16,16 @@
 
 class Node;
 
-class Hypercube3 {
+class Hypercube3Random {
 public:
-	Hypercube3(int, int, bool, int, bool);
-	virtual ~Hypercube3();
+	Hypercube3Random(int, int, bool, int);
+	virtual ~Hypercube3Random();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
 	void printVersion();
 	void print();
-	void randomGame();
-    void logicalGame();
+	void game();
 	//std::vector<std::string> player1;
 	//std::vector<std::string> player2;
 	//void analysis(int);
@@ -41,7 +40,6 @@ private:
 	bool watch;
 	void rotateBar();
 	int barCount;
-    bool random;
 	std::list<Node*> nodeList;
 	
 };

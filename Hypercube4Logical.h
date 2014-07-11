@@ -1,13 +1,13 @@
 //
-//  Hypercube4.h
+//  Hypercube4Logical.h
 //  CPPWeightedLogical
 //
 //  Created by Kyle Rodgers on 7/7/14.
 //  Copyright (c) 2014 KMRodgers. All rights reserved.
 //
 
-#ifndef GUARD_Hypercube4_h
-#define GUARD_Hypercube4_h
+#ifndef GUARD_Hypercube4Logical_h
+#define GUARD_Hypercube4Logical_h
 
 #include <list>
 #include <vector>
@@ -16,17 +16,16 @@
 
 class Node;
 
-class Hypercube4 {
+class Hypercube4Logical {
 public:
-	Hypercube4(int, int, bool, int, bool);
-	virtual ~Hypercube4();
+	Hypercube4Logical(int, int, bool, int);
+	virtual ~Hypercube4Logical();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
 	void printVersion();
 	void print();
-	void randomGame();
-    void logicalGame();
+	void game();
 	//std::vector<std::string> player1;
 	//std::vector<std::string> player2;
 	//void analysis(int);
@@ -41,7 +40,6 @@ private:
 	bool watch;
 	void rotateBar();
 	int barCount;
-    bool random;
 	std::list<Node*> nodeList;
 	
 };

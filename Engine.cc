@@ -1,10 +1,16 @@
 #include <iostream>
-#include "PetersenGraph.h"
-#include "CompleteGraph.h"
-#include "Hypercube2.h"
-#include "Hypercube3.h"
-#include "Hypercube4.h"
+#include "PetersenGraphRandom.h"
+#include "CompleteGraphRandom.h"
+#include "Hypercube2Random.h"
+#include "Hypercube3Random.h"
+#include "Hypercube4Random.h"
 #include "Engine.h"
+
+#include "PetersenGraphLogical.h"
+#include "CompleteGraphLogical.h"
+#include "Hypercube2Logical.h"
+#include "Hypercube3Logical.h"
+#include "Hypercube4Logical.h"
 
 #include <string>
 #include <cstdio>
@@ -481,11 +487,18 @@ void Engine::createPetersenGraph(int choice, int edgeWeight, bool watch, bool ra
 {
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << choice << std::endl;
-    for (int i = 1; i <= choice; i++)
-    {
-        PetersenGraph *a = new PetersenGraph(i, edgeWeight, watch, choice, random);
-        delete a;
-    }
+    if (random == true)
+        for (int i = 1; i <= choice; i++)
+        {
+            PetersenGraphRandom *a = new PetersenGraphRandom(i, edgeWeight, watch, choice);
+            delete a;
+        }
+    else if (random == false)
+        for (int i = 1; i <= choice; i++)
+        {
+            PetersenGraphLogical *a = new PetersenGraphLogical(i, edgeWeight, watch, choice);
+            delete a;
+        }
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
 	dataAnalysis(choice);
@@ -522,11 +535,18 @@ void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, boo
 	//int numberOfNodes = numNodes;
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << numGames << std::endl;
-    for (int i = 1; i <= numGames; i++)
-    {
-        CompleteGraph *a = new CompleteGraph(i, numNodes, edgeWeight, watch, numGames, random);
-        delete a;
-    }
+    if (random == true)
+        for (int i = 1; i <= numGames; i++)
+        {
+            CompleteGraphRandom *a = new CompleteGraphRandom(i, numNodes, edgeWeight, watch, numGames);
+            delete a;
+        }
+    if (random == false)
+        for (int i = 1; i <= numGames; i++)
+        {
+            CompleteGraphLogical *a = new CompleteGraphLogical(i, numNodes, edgeWeight, watch, numGames);
+            delete a;
+        }
     std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
 	parsePlayerLogicalData();
@@ -565,23 +585,50 @@ void Engine::createHypercubeGraph(int numGames, int edgeWeight, int dimensions, 
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << numGames << std::endl;
 	if (dimensions == 2)
-        for (int i = 1; i <= numGames; i++)
-        {
-            Hypercube2 *a = new Hypercube2(i, edgeWeight, watch, numGames, random);
-            delete a;
-        }
+    {
+        if (random == true)
+            for (int i = 1; i <= numGames; i++)
+            {
+                Hypercube2Random *a = new Hypercube2Random(i, edgeWeight, watch, numGames);
+                delete a;
+            }
+        else if (random == false)
+            for (int i = 1; i <= numGames; i++)
+            {
+                Hypercube2Logical *a = new Hypercube2Logical(i, edgeWeight, watch, numGames);
+                delete a;
+            }
+    }
     else if (dimensions == 3)
-        for (int i = 1; i <= numGames; i++)
-        {
-            Hypercube3 *a = new Hypercube3(i, edgeWeight, watch, numGames, random);
-            delete a;
-        }
+    {
+        if (random == true)
+            for (int i = 1; i <= numGames; i++)
+            {
+                Hypercube3Random *a = new Hypercube3Random(i, edgeWeight, watch, numGames);
+                delete a;
+            }
+        else if (random == false)
+            for (int i = 1; i <= numGames; i++)
+            {
+                Hypercube3Logical *a = new Hypercube3Logical(i, edgeWeight, watch, numGames);
+                delete a;
+            }
+    }
     else if (dimensions == 4)
-        for (int i = 1; i <= numGames; i++)
-        {
-            Hypercube4 *a = new Hypercube4(i, edgeWeight, watch, numGames, random);
-            delete a;
-        }
+    {
+        if (random == true)
+            for (int i = 1; i <= numGames; i++)
+            {
+                Hypercube4Random *a = new Hypercube4Random(i, edgeWeight, watch, numGames);
+                delete a;
+            }
+        else if (random == false)
+            for (int i = 1; i <= numGames; i++)
+            {
+                Hypercube4Logical *a = new Hypercube4Logical(i, edgeWeight, watch, numGames);
+                delete a;
+            }
+    }
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
 	parsePlayerLogicalData();

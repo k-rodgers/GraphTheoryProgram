@@ -1,7 +1,7 @@
-//Hypercube2.h
+//Hypercube2Logical.h
 
-#ifndef GUARD_Hypercube2_h
-#define GUARD_Hypercube2_h
+#ifndef GUARD_Hypercube2Logical_h
+#define GUARD_Hypercube2Logical_h
 
 #include <list>
 #include <vector>
@@ -10,17 +10,16 @@
 
 class Node;
 
-class Hypercube2 {
+class Hypercube2Logical {
 public:
-	Hypercube2(int, int, bool, int, bool);
-	virtual ~Hypercube2();
+	Hypercube2Logical(int, int, bool, int);
+	virtual ~Hypercube2Logical();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
 	void printVersion();
 	void print();
-    void randomGame();
-	void logicalGame();
+	void game();
 	//std::vector<std::string> player1;
 	//std::vector<std::string> player2;
 	//void analysis(int);
@@ -35,7 +34,6 @@ private:
 	bool watch;
 	void rotateBar();
 	int barCount;
-    bool random;
 	std::list<Node*> nodeList;
 	
 };

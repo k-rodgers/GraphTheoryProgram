@@ -1,5 +1,5 @@
-#ifndef GUARD_CompleteGraph_h
-#define GUARD_CompleteGraph_h
+#ifndef GUARD_CompleteGraphLogical_h
+#define GUARD_CompleteGraphLogical_h
 
 #include <list>
 #include <vector>
@@ -7,17 +7,16 @@
 
 class Node;
 
-class CompleteGraph {
+class CompleteGraphLogical {
 public:
-	CompleteGraph(int, int, int, bool, int, bool);
-	virtual ~CompleteGraph();
+	CompleteGraphLogical(int, int, int, bool, int);
+	virtual ~CompleteGraphLogical();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
 	void printVersion();
 	void print();
-	void logicalGame();
-    void randomGame();
+	void game();
 	//std::vector<std::string> player1;
 	//std::vector<std::string> player2;
 	//void analysis(int);
@@ -33,7 +32,6 @@ private:
 	void rotateBar();
 	bool watch;
 	int barCount;
-    bool random;
 	std::list<Node*> nodeList;
 	
 };

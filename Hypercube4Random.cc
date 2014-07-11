@@ -1,4 +1,4 @@
-// Hypercube3.cc
+// Hypercube4Random.cc
 
 #include <list>
 #include <string>
@@ -15,41 +15,38 @@
 
 #include "Token.h"
 #include "Node.h"
-#include "Hypercube3.h"
+#include "Hypercube4Random.h"
 #include "RandomEngine.h"
 
 /*
- This is the .cpp file for the Hypercube3 object.
+ This is the .cpp file for the Hypercube4Random object.
  */
 
-//Desc: Constructor for the Hypercube3 object. Constructs a Hypercube3 of Nodes,
+//Desc: Constructor for the Hypercube4Random object. Constructs a Hypercube4Random of Nodes,
 //		and creates edges between them.
 //Input: int i for the number of Nodes
-Hypercube3::Hypercube3(int i, int j, bool b, int k, bool rand)
+Hypercube4Random::Hypercube4Random(int i, int j, bool b, int k)
 {
 	gameNumber = i;
 	edgeWeight = j;
 	totalGames = k;
 	watch = b;
 	nodeNameCount = 0;
-	for (int l = 1; l <= 8; l++)
+	for (int l = 1; l <= 16; l++)
 	{
 		createInitialNodes(l);
 		nodeNameCount++;
 	}
 	createInitialEdges();
 	std::ofstream master_data;
-    if (random == true)
-        randomGame();
-    else
-        logicalGame();
+	game();
 }
 //analysis(numGames);
 
 
-//Desc: Destructor for the Hypercube3 object. Deletes the nodeList
+//Desc: Destructor for the Hypercube4Random object. Deletes the nodeList
 //		and frees up memory.
-Hypercube3::~Hypercube3()
+Hypercube4Random::~Hypercube4Random()
 {
 	while(!nodeList.empty()) {
 		delete nodeList.front();
@@ -61,7 +58,7 @@ Hypercube3::~Hypercube3()
 }
 
 //Desc: Creates the initial edges
-void Hypercube3::createInitialEdges()
+void Hypercube4Random::createInitialEdges()
 {
 	std::list<Node*>::iterator iter1 = nodeList.begin();    // 1
 	std::list<Node*>::iterator iter2 = nodeList.begin();
@@ -124,17 +121,117 @@ void Hypercube3::createInitialEdges()
     (*iter1)->setEdge(*iter2, edgeWeight);
     std::advance(iter2, 2);                                 // 7
     (*iter1)->setEdge(*iter2, edgeWeight);
+    
+    iter1 = nodeList.begin();                               // 1
+    iter2 = nodeList.begin();
+    std::advance(iter1, 8);
+    std::advance(iter2, 9);                                 // 2
+	(*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 4
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 1);                                 // 5
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter1, 1);                                 // 2
+    iter2 = nodeList.begin();
+    std::advance(iter2, 8);                                 // 1
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 3
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 3);                                 // 6
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter1, 1);                                 // 3
+    iter2 = nodeList.begin();
+    std::advance(iter2, 9);                                 // 2
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 4
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 3);                                 // 7
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter1, 1);                                 // 4
+    iter2 = nodeList.begin();
+    std::advance(iter2, 8);                                 // 1
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 3
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 5);                                 // 8
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter1, 1);                                 // 5
+    iter2 = nodeList.begin();
+    std::advance(iter2, 8);                                 // 1
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 5);                                 // 6
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 8
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter1, 1);                                 // 6
+    iter2 = nodeList.begin();
+    std::advance(iter2, 9);                                 // 2
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 3);                                 // 5
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 7
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter1, 1);                                 // 7
+    iter2 = nodeList.begin();
+    std::advance(iter2, 10);                                 // 3
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 3);                                 // 6
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 8
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter1, 1);                                 // 8
+    iter2 = nodeList.begin();
+    std::advance(iter2, 11);                                 // 4
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 1);                                 // 5
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    std::advance(iter2, 2);                                 // 7
+    (*iter1)->setEdge(*iter2, edgeWeight);
+    
+    iter1 = nodeList.begin();                               // 1
+    iter2 = nodeList.begin();
+    std::advance(iter2, 8);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
+    std::advance(iter1, 1);
+    std::advance(iter2, 1);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
+    std::advance(iter1, 1);
+    std::advance(iter2, 1);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
+    std::advance(iter1, 1);
+    std::advance(iter2, 1);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
+    std::advance(iter1, 1);
+    std::advance(iter2, 1);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
+    std::advance(iter1, 1);
+    std::advance(iter2, 1);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
+    std::advance(iter1, 1);
+    std::advance(iter2, 1);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
+    std::advance(iter1, 1);
+    std::advance(iter2, 1);
+    (*iter1)->setEdge(*iter2, edgeWeight);
+	(*iter2)->setEdge(*iter1, edgeWeight);
 }
 
 //Desc: Creates the initial Nodes
 //Input: int i, which is the name of the Node
-void Hypercube3::createInitialNodes(int i)
+void Hypercube4Random::createInitialNodes(int i)
 {
 	Node *n = new Node(i);
 	nodeList.push_back(n);
 }
 
-void Hypercube3::removeEdge()
+void Hypercube4Random::removeEdge()
 {
 	int n1 = 0;
 	int n2 = 0;
@@ -160,7 +257,7 @@ void Hypercube3::removeEdge()
 }
 
 //Desc: Prints out the current version of the program the user is running
-void Hypercube3::printVersion()
+void Hypercube4Random::printVersion()
 {
 	std::cout << std::endl;
 	std::cout << "Version: 0.2 Beta" << std::endl;
@@ -168,7 +265,7 @@ void Hypercube3::printVersion()
 	std::cout << "Date of Last Revision: 5/4/14 23:30" << std::endl;
 }
 
-void Hypercube3::print()
+void Hypercube4Random::print()
 {
 	std::cout << "This surface contains the following nodes and edges: " << std::endl;
 	std::list<Node*>::iterator iter;
@@ -178,7 +275,7 @@ void Hypercube3::print()
 	}
 }
 
-int Hypercube3::getRandomNumber(int size)
+int Hypercube4Random::getRandomNumber(int size)
 {
 	
 	RandomEngine *rand = RandomEngine::instance();
@@ -190,7 +287,7 @@ int Hypercube3::getRandomNumber(int size)
 //This is the method that plays the game
 //The master data is sent to the file /output_data/mater_data.txt
 
-void Hypercube3::rotateBar()
+void Hypercube4Random::rotateBar()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -209,7 +306,7 @@ void Hypercube3::rotateBar()
 	return;
 }
 
-int Hypercube3::getRandomEdge(int size)
+int Hypercube4Random::getRandomEdge(int size)
 {
 	
 	RandomEngine *rand = RandomEngine::instance();
@@ -218,7 +315,7 @@ int Hypercube3::getRandomEdge(int size)
 	return randNum;
 }
 
-void Hypercube3::randomGame()
+void Hypercube4Random::game()
 {
     /*    std::cout << edgeWeight << std::endl;
      for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
@@ -232,114 +329,7 @@ void Hypercube3::randomGame()
 	std::string master_data_path = "output_data/master_data.txt";
 	
     //	master_data.open(path+gameName);
-	master_data.open(master_data_path.c_str(), std::ios_base::app);
-	std::list<Node*>::iterator iter1 = nodeList.begin();
-	Node* nextMoveNode;
-	Token* t = new Token(*iter1);
-	int nextRandomWeight = 0;
-	int edgeSize = 0;
-	int nextMove = 0;
-	if (watch == true)
-	{
-		std::cout << "Game " << gameNumber << std::endl;
-		std::cout << std::endl;
-		master_data << (t->getTokenLocation())->getName() << "-";
-		while (true)
-		{
-            nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize());
-            nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);
-	        edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
-            nextRandomWeight = getRandomEdge(edgeSize);
-            if (nextRandomWeight == 0)
-		    {
-		    	t->getTokenLocation()->destroyEdge(nextMoveNode);
-	    		nextMoveNode->destroyEdge(t->getTokenLocation());
-		    }
-            else if (nextRandomWeight > 0)
-        	{
-        		master_data << nextRandomWeight << "-";
-        		(t->getTokenLocation())->setEdge(nextMoveNode, nextMoveNode->getWeight(t->getTokenLocation()) - nextRandomWeight);
-		        (nextMoveNode)->setEdge(t->getTokenLocation(), t->getTokenLocation()->getWeight(nextMoveNode) - nextRandomWeight);
-    		    std::cout << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
-	    	    //master_data << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << (nextMoveNode)->getName() << std::endl;
-    	    	t->setPlayerTurn();
-		        t->setTokenLocation(nextMoveNode);
-		        master_data << (t->getTokenLocation())->getName() << "-";
-		    }
-    	    if (t->getTokenLocation()->getEdgeListSize() == 0)
-			{
-				//moves += std::to_string((t->getTokenLocation())->getName());
-				t->setPlayerTurn();
-				std::cout << std::endl;
-				//master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
-				master_data << t->getCurrentPlayerTurn() << std::endl;
-				std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
-				std::cout << std::endl;
-                delete t;
-				break;
-			}
-		}
-	}
-	else
-	{
-		master_data << (t->getTokenLocation())->getName() << "-";
-		while (true)
-		{
-			rotateBar();
-            for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
-                (*iter)->setDegree();
-            //            for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
-            //                std::cout << "Node: " << (*iter)->getName() << " Degree: " << (*iter)->getDegree() << std::endl;
-            nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize());
-            nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);
-            edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
-        	nextRandomWeight = getRandomEdge(edgeSize);
-            if (nextRandomWeight > 0)
-    	    {
-    	    	master_data << nextRandomWeight << "-";
-        		(t->getTokenLocation())->removeEdgeWeight(nextMoveNode, nextRandomWeight);
-	        	(nextMoveNode)->removeEdgeWeight(t->getTokenLocation(), nextRandomWeight);
-    		    t->setPlayerTurn();
-	        	t->setTokenLocation(nextMoveNode);
-       			master_data << (t->getTokenLocation())->getName() << "-";
-	    	}
-            /*            else if (nextRandomWeight == 0)
-             {
-             t->getTokenLocation()->destroyEdge(nextMoveNode);
-             nextMoveNode->destroyEdge(t->getTokenLocation());
-             }
-             */    	    if (t->getTokenLocation()->getEdgeListSize() == 0)
-             {
-                 //moves += std::to_string((t->getTokenLocation())->getName());
-                 t->setPlayerTurn();
-                 //				std::cout << std::endl;
-                 //master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
-                 master_data << t->getCurrentPlayerTurn() << std::endl;
-                 //				std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
-                 //				std::cout << std::endl;
-                 delete t;
-                 break;
-             }
-        }
-        master_data.close();
-    }
-}
-
-void Hypercube3::logicalGame()
-{
-    /*    std::cout << edgeWeight << std::endl;
-     for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
-     std::cout << (*iter)->getDegree() << std::endl;
-     */    std::ofstream master_data;
-	//master_data.open("logs/log.txt");
-	
-	
-	//std::string moves;
-    //	std::string gameName = std::to_string(i) + ".txt";
-	std::string master_data_path = "output_data/master_data.txt";
-	
-    //	master_data.open(path+gameName);
-	master_data.open(master_data_path.c_str(), std::ios_base::app);
+	master_data.open(master_data_path, std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();
 	Node* nextMoveNode;
 	Token* t = new Token(*iter1);
@@ -362,6 +352,7 @@ void Hypercube3::logicalGame()
                 nextMoveNode = t->getTokenLocation()->getMinimalDegreeNode();     // sets node at based in this number
 	        edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
             nextRandomWeight = getRandomEdge(edgeSize);
+            nextRandomWeight = 1;
             if (nextRandomWeight == 0)
 		    {
 		    	t->getTokenLocation()->destroyEdge(nextMoveNode);
@@ -441,3 +432,41 @@ void Hypercube3::logicalGame()
         master_data.close();
     }
 }
+
+/*
+ 
+ while (true)
+ {
+ nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize()); // inside () returns an int the size of possible nodes to go to
+ nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);     // sets node at based in this number
+ edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
+ nextRandomWeight = getRandomEdge(edgeSize);
+ if (nextRandomWeight > 0)
+ {
+ (t->getTokenLocation())->setEdge(nextMoveNode, nextMoveNode->getWeight(t->getTokenLocation()) - nextRandomWeight);
+ (nextMoveNode)->setEdge(t->getTokenLocation(), t->getTokenLocation()->getWeight(nextMoveNode) - nextRandomWeight);
+ std::cout << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
+ //master_data << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << (nextMoveNode)->getName() << std::endl;
+ t->setPlayerTurn();
+ t->setTokenLocation(nextMoveNode);
+ }
+ else if (nextRandomWeight == 0)
+ {
+ t->getTokenLocation()->destroyEdge(nextMoveNode);
+ nextMoveNode->destroyEdge(t->getTokenLocation());
+ }
+ if (t->getTokenLocation()->getEdgeListSize() == 0)
+ {
+ //moves += std::to_string((t->getTokenLocation())->getName());
+ t->setPlayerTurn();
+ std::cout << std::endl;
+ //master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
+ master_data << t->getCurrentPlayerTurn() << std::endl;
+ std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
+ std::cout << std::endl;
+ break;
+ }
+ master_data << (t->getTokenLocation())->getName() << "-";
+ }
+ }
+ */
