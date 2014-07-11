@@ -184,7 +184,7 @@ void Hypercube2Logical::game()
 	std::string master_data_path = "output_data/master_data.txt";
 	
     //	master_data.open(path+gameName);
-	master_data.open(master_data_path, std::ios_base::app);
+	master_data.open(master_data_path.c_str(), std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();
 	Node* nextMoveNode;
 	Token* t = new Token(*iter1);
