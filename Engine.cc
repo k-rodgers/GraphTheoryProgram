@@ -206,22 +206,24 @@ void Engine::parseMasterData()
 		if (*(iter) == '1')
 		{
 			p1size++;
-			parseLine = parseLine.substr(0, parseLine.size() - 2);
+            std::string p1ParseLine;
+			p1ParseLine = parseLine.substr(0, parseLine.size() - 2);
             //parseLine.pop_back();
 			//parseLine.pop_back();
-			p1 << parseLine << std::endl;
-			if (parseLine.size() > longestGame)
-				longestGame = (int)parseLine.size();
+			p1 << p1ParseLine << std::endl;
+			if (p1ParseLine.size() > longestGame)
+				longestGame = (int)p1ParseLine.size();
 		}
 		else if(*(iter) == '2')
 		{
 			p2size++;
-			parseLine = parseLine.substr(0, parseLine.size() - 2);
+            std::string p2ParseLine;
+			p2ParseLine = parseLine.substr(0, parseLine.size() - 2);
             //parseLine.pop_back();
 			//parseLine.pop_back();
-			p2 << parseLine << std::endl;
-			if (parseLine.size() > longestGame)
-				longestGame = (int)parseLine.size();
+			p2 << p2ParseLine << std::endl;
+			if (p2ParseLine.size() > longestGame)
+				longestGame = (int)p2ParseLine.size();
 		}
 		master.clear();
 	}
@@ -631,7 +633,7 @@ void Engine::createHypercubeGraph(int numGames, int edgeWeight, int dimensions, 
     }
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
-	parsePlayerLogicalData();
+	//parsePlayerLogicalData();
 	dataAnalysis(numGames);
 	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();
