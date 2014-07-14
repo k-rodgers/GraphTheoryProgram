@@ -284,21 +284,21 @@ void Engine::dataAnalysis(int choice)
 	{
 		rotateBarAnalyzeP1();
 		std::map<std::string, int>::iterator it = player1moves.find(testLine);
-        if (testLine == it->first)
+        if (it == player1moves.end())
+            player1moves[testLine] = 1;
+        else
             (it->second)++;
-		else if (it == player1moves.end())
-			player1moves[testLine] = 1;
-		testLine.clear();
+        testLine.clear();
 	}
 	std::cout << "\nPlayer 1 data analyzed successfully!" << std::endl;
 	while (std::getline(p2, testLine))
 	{
 		rotateBarAnalyzeP2();
         std::map<std::string, int>::iterator it = player2moves.find(testLine);
-        if (testLine == it->first)
+        if (it == player2moves.end())
+            player2moves[testLine] = 1;
+        else
             (it->second)++;
-		else if (it == player2moves.end())
-			player2moves[testLine] = 1;
 		testLine.clear();
 	}
 	std::cout << "\nPlayer 2 data analyzed successfully!" << std::endl;
