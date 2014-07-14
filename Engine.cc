@@ -232,7 +232,7 @@ void Engine::parseMasterData()
 	p2.close();
 	master.close();	
 }	
-
+/*
 void Engine::parsePlayerLogicalData()
 {
 	std::ifstream p1;
@@ -263,7 +263,7 @@ void Engine::parsePlayerLogicalData()
 	p1logical.close();
 	p2logical.close();
 }
-
+*/
 void Engine::dataAnalysis(int choice)
 {
 //	longestGame = 1;
@@ -551,7 +551,7 @@ void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, boo
         }
     std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	parseMasterData();
-	parsePlayerLogicalData();
+//	parsePlayerLogicalData();
 	dataAnalysis(numGames);
 	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();

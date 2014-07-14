@@ -26,7 +26,7 @@ private:
 	void createCompleteGraph(int, int, int, bool, bool);
 	void createHypercubeGraph(int, int, int, bool, bool);
 	void parseMasterData();
-	void parsePlayerLogicalData();
+//	void parsePlayerLogicalData();
 	void dataAnalysis(int);
 };
 
