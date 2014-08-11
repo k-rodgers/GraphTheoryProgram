@@ -92,7 +92,8 @@ void Node::setDegree()
     }
     for (std::map<Node*, int>::iterator iter = edgeList.begin(); iter != edgeList.end(); iter++)
     {
-        degree += iter->second;
+        if (iter->second !=0)
+        degree++;
     }
 }
 
