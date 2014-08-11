@@ -1,50 +1,56 @@
+// HypercubeGraphLogical.cc
+
 #include <list>
 #include <string>
 #include <iostream>
 #include <algorithm>
 #include <iterator>
-#include <fstream>	
-//#include <boolean>					
+#include <fstream>
+//#include <boolean>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "Token.h"
 #include "Node.h"
-#include "PetersenGraphLogical.h"
+#include "HypercubeGraphLogical.h"
 #include "RandomEngine.h"
 
 /*
- This is the .cpp file for the PetersenGraphLogical object.
+ This is the .cpp file for the HypercubeGraphLogical object.
  */
 
-//Desc: Constructor for the PetersenGraphLogical object. Constructs a PetersenGraphLogical of Nodes,
+//Desc: Constructor for the HypercubeGraphLogical object. Constructs a HypercubeGraphLogical of Nodes,
 //		and creates edges between them.
 //Input: int i for the number of Nodes
-PetersenGraphLogical::PetersenGraphLogical(int i, int j, bool b, int k)
+HypercubeGraphLogical::HypercubeGraphLogical(int i, int j, bool b, int k, int size)
 {
 	gameNumber = i;
 	edgeWeight = j;
 	totalGames = k;
+    numberOfNodes = (int)pow(2, size);
+    dimension = size;
 	watch = b;
 	nodeNameCount = 0;
-	for (int l = 1; l <= 10; l++)
+	for (int l = 1; l <= numberOfNodes; l++)
 	{
 		createInitialNodes(l);
 		nodeNameCount++;
 	}
 	createInitialEdges();
 	std::ofstream master_data;
+//    print();
 	game();
 }
 //analysis(numGames);
 
 
-//Desc: Destructor for the PetersenGraphLogical object. Deletes the nodeList
+//Desc: Destructor for the HypercubeGraphLogical object. Deletes the nodeList
 //		and frees up memory.
-PetersenGraphLogical::~PetersenGraphLogical()
+HypercubeGraphLogical::~HypercubeGraphLogical()
 {
 	while(!nodeList.empty()) {
 		delete nodeList.front();
@@ -56,179 +62,191 @@ PetersenGraphLogical::~PetersenGraphLogical()
 }
 
 //Desc: Creates the initial edges
-void PetersenGraphLogical::createInitialEdges()
+void HypercubeGraphLogical::createInitialEdges()
 {
-	if (edgeWeight == 0)
+    int creationMatrix [numberOfNodes][numberOfNodes];
+    
+    int dim3size = (int)pow(2,3);
+    int dim4size = (int)pow(2,4);
+    int dim5size = (int)pow(2,5);
+    int dim6size = (int)pow(2,6);
+    int dim7size = (int)pow(2,7);
+    int dim8size = (int)pow(2,8);
+    int dim9size = (int)pow(2,9);
+    
+    int dim3 [dim3size][dim3size];
+    int dim4 [dim4size][dim4size];
+    int dim5 [dim5size][dim5size];
+    int dim6 [dim6size][dim6size];
+    int dim7 [dim7size][dim7size];
+    int dim8 [dim8size][dim8size];
+    int dim9 [dim9size][dim9size];
+    
+    if (dimension <= 3)
     {
-        std::list<Node*>::iterator iter1 = nodeList.begin();
-        std::list<Node*>::iterator iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        iter2 = nodeList.begin();
-        std::advance(iter1, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 6);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        for (int i = 0; i < numberOfNodes; i++)
+        {
+            for (int j = 0; j < numberOfNodes; j++)
+            {
+                if (i%2 == 0)
+                {
+                    if (j%2 == 0)
+                        creationMatrix[i][j] = 0;
+                    else
+                        creationMatrix[i][j] = 1;
+                }
+                else
+                {
+                    if (j%2 == 0)
+                        creationMatrix[i][j] = 1;
+                    else
+                        creationMatrix[i][j] = 0;
+                }
+            }
+        }
     }
-    else
+    else                                                    //creates the hypercube above dimension 4
     {
-        std::list<Node*>::iterator iter1 = nodeList.begin();
-        std::list<Node*>::iterator iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        iter2 = nodeList.begin();
-        std::advance(iter1, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 6);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
+        for (int i = 0; i < (int)pow(2, 3); i++)             //creates dim3 matrix
+        {
+            for (int j = 0; j < (int)pow(2, 3); j++)
+            {
+                if (i%2 == 0)
+                {
+                    if (j%2 == 0)
+                        dim3[i][j] = 0;
+                    else
+                        dim3[i][j] = 1;
+                }
+                else
+                {
+                    if (j%2 == 0)
+                        dim3[i][j] = 1;
+                    else
+                        dim3[i][j] = 0;
+                }
+            }
+        }
+        for (int i = 0; i < (int)pow(2, 3); i++)            //copies dim3 to dim4 top-left quadrant
+        {
+            for (int j = 0; j < (int)pow(2, 3); j++)
+            {
+                dim4[i][j] = dim3[i][j];
+            }
+        }
+        for (int i = 0; i < (int)pow(2, 4) / 2; i++)        //copies dim3 to bottom-right quadrant
+        {
+            for (int j = 0; j < (int)pow(2, 4) / 2; j++)
+            {
+                dim4[i + ((int)pow(2, 4) / 2)][i + ((int)pow(2, 4) / 2)] = dim3[i][j];
+            }
+        }
+        for (int i = 0; i < numberOfNodes/2; i++)           //covers the top-left quadrant
+        {
+            for (int j = 0; j < numberOfNodes/2; j++)
+            {
+                if (i%2 == 0)
+                {
+                    if (j%2 == 0)
+                        creationMatrix[i][j] = 0;
+                    else
+                        creationMatrix[i][j] = 1;
+                }
+                else
+                {
+                    if (j%2 == 0)
+                        creationMatrix[i][j] = 1;
+                    else
+                        creationMatrix[i][j] = 0;
+                }
+            }
+        }
+        for (int i = numberOfNodes/2; i < numberOfNodes; i++)   //covers the bottom right quadrant
+        {
+            for (int j = numberOfNodes/2; j < numberOfNodes; j++)
+            {
+                if (i%2 == 0)
+                {
+                    if (j%2 == 0)
+                        creationMatrix[i][j] = 0;
+                    else
+                        creationMatrix[i][j] = 1;
+                }
+                else
+                {
+                    if (j%2 == 0)
+                        creationMatrix[i][j] = 1;
+                    else
+                        creationMatrix[i][j] = 0;
+                }
+            }
+        }
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < numberOfNodes/2; i++)   //covers the top right quadrant
+        {
+            for (int j = numberOfNodes/2; j < numberOfNodes; j++)
+            {
+                creationMatrix[i][j] = 0;           //fills array with zeroes
+            }
+        }
+        row = 0;
+        col = numberOfNodes/2;
+        while (col != numberOfNodes)
+        {
+            creationMatrix[row][col] = 1;
+            row++;
+            col++;
+        }
+        for (int i = numberOfNodes/2; i < numberOfNodes; i++)   //covers the bottom left
+        {
+            for (int j = 0; j < numberOfNodes/2; j++)
+            {
+                creationMatrix[i][j] = 0;           //fills array with zeroes
+            }
+        }
+        row = numberOfNodes/2;
+        col = 0;
+        while (col != numberOfNodes/2)
+        {
+            creationMatrix[row][col] = 1;
+            row++;
+            col++;
+        }
     }
-}
+    
+    for (int i = 0; i < numberOfNodes; i++)
+    {
+        for (int j = 0; j < numberOfNodes; j++)
+            std::cout << creationMatrix[i][j] << " ";
+        std::cout << std::endl;
+    }
+/*	std::list<Node*>::iterator iter1 = nodeList.begin();
+	std::list<Node*>::iterator iter2 = nodeList.begin();
+    for (int i = 0; i < numberOfNodes; i++)
+        for (int j = 0; j < numberOfNodes; j++)
+        {
+            if (creationMatrix[i][j] == 1)
+            {
+                std::advance(iter1, i);
+                std::advance(iter2, j);
+                (*iter1)->setEdge(*iter2, edgeWeight);
+                (*iter2)->setEdge(*iter1, edgeWeight);
+                iter1 = nodeList.begin();
+                iter2 = nodeList.begin();
+            }
+        }
+*/}
 
 //Desc: Creates the initial Nodes
 //Input: int i, which is the name of the Node
-void PetersenGraphLogical::createInitialNodes(int i)
+void HypercubeGraphLogical::createInitialNodes(int i)
 {
 	Node *n = new Node(i);
 	nodeList.push_back(n);
 }
 
-void PetersenGraphLogical::removeEdge()
+void HypercubeGraphLogical::removeEdge()
 {
 	int n1 = 0;
 	int n2 = 0;
@@ -254,7 +272,7 @@ void PetersenGraphLogical::removeEdge()
 }
 
 //Desc: Prints out the current version of the program the user is running
-void PetersenGraphLogical::printVersion()
+void HypercubeGraphLogical::printVersion()
 {
 	std::cout << std::endl;
 	std::cout << "Version: 0.2 Beta" << std::endl;
@@ -262,7 +280,7 @@ void PetersenGraphLogical::printVersion()
 	std::cout << "Date of Last Revision: 5/4/14 23:30" << std::endl;
 }
 
-void PetersenGraphLogical::print()
+void HypercubeGraphLogical::print()
 {
 	std::cout << "This surface contains the following nodes and edges: " << std::endl;
 	std::list<Node*>::iterator iter;
@@ -272,7 +290,7 @@ void PetersenGraphLogical::print()
 	}
 }
 
-int PetersenGraphLogical::getRandomNumber(int size)
+int HypercubeGraphLogical::getRandomNumber(int size)
 {
 	
 	RandomEngine *rand = RandomEngine::instance();
@@ -281,10 +299,15 @@ int PetersenGraphLogical::getRandomNumber(int size)
 	return randNum;
 }
 
+int HypercubeGraphLogical::getnumberOfNodes()
+{
+    return numberOfNodes;
+}
+
 //This is the method that plays the game
 //The master data is sent to the file /output_data/mater_data.txt
 
-void PetersenGraphLogical::rotateBar()
+void HypercubeGraphLogical::rotateBar()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -293,7 +316,7 @@ void PetersenGraphLogical::rotateBar()
 	if (whichOne == 3)
 	{
 		std::cout << '\r' << barspin[whichOne] << "  Please wait while the games are played. Game: " << gameNumber << " " << (int)(((double)gameNumber/totalGames)*100.0) << "% complete";
-
+        
 	}
 	else
 	{
@@ -303,7 +326,7 @@ void PetersenGraphLogical::rotateBar()
 	return;
 }
 
-int PetersenGraphLogical::getRandomEdge(int size)
+int HypercubeGraphLogical::getRandomEdge(int size)
 {
 	
 	RandomEngine *rand = RandomEngine::instance();
@@ -312,9 +335,9 @@ int PetersenGraphLogical::getRandomEdge(int size)
 	return randNum;
 }
 
-void PetersenGraphLogical::game()
+void HypercubeGraphLogical::game()
 {
-    /*    std::cout << edgeWeight << std::endl;
+	/*    std::cout << edgeWeight << std::endl;
      for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
      std::cout << (*iter)->getDegree() << std::endl;
      */    std::ofstream master_data;
@@ -429,3 +452,10 @@ void PetersenGraphLogical::game()
         master_data.close();
     }
 }
+
+/*
+ 
+ To do: global variables of arrays, array size? That way, can pass pointers and array size to loops ((int)power(2, x)).
+ Hash table to say "I want array 3 and it returns pointer to array"
+ 
+ */

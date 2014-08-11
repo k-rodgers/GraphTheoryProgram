@@ -138,3 +138,31 @@ void Node::destroyEdge(Node* n1)
 {
 	edgeList.erase(n1);
 }
+
+void Node::cleanup()
+{
+	for (std::map<Node*, int>::iterator iter = edgeList.begin(); iter != edgeList.end(); iter++)
+	{
+		if (iter->second == 0)
+		{
+			edgeList.erase(iter->first);
+			(iter->first)->destroyEdge(this);
+		}
+	}
+}
+
+bool Node::edgeExists(Node* n1)
+{
+	for (std::map<Node*, int>::iterator iter = edgeList.begin(); iter != edgeList.end(); iter++)
+	{
+		if (iter->first == n1)
+		{
+			if (iter->second > 0)
+			{
+				return true;
+				break;
+			}
+		}
+	}
+	return false;
+}

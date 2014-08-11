@@ -85,8 +85,8 @@ void Engine::startMenuChoices(int choice)
             random = false;
         }
         std::cout << "What weight would you like to assign the edges?: ";
-        //		std::cout << "\tNode: Type 0 for random." << std::endl;
-        //		std::cout << "What weight? ";
+		std::cout << "\n\tNote: Type 0 for a random weight for each edge, between 1 and 10." << std::endl;
+        std::cout << "What weight? ";
         std::cin >> edgeWeight;
         std::cout << "How many games would you like to play?: ";
         std::cin >> numGamesToPlay;
@@ -122,8 +122,8 @@ void Engine::startMenuChoices(int choice)
 		std::cout << "How many nodes would you like in this graph?: ";
 		std::cin >> numNodes;
 		std::cout << "What weight would you like to assign the edges?: ";
-//		std::cout << "\tNode: Type 0 for random." << std::endl;
-//		std::cout << "What weight? ";
+		std::cout << "\n\tNote: Type 0 for a random weight for each edge, between 1 and 10." << std::endl;
+		std::cout << "What weight? ";
 		std::cin >> edgeWeight;
 		std::cout << "How many games would you like to play?: ";
 		std::cin >> numGamesToPlay;
@@ -160,8 +160,8 @@ void Engine::startMenuChoices(int choice)
 		std::cout << "What dimension would you like this graph to be? (2-4): ";
 		std::cin >> dimension;
 		std::cout << "What weight would you like to assign the edges?: ";
-//		std::cout << "\tNode: Type 0 for random." << std::endl;
-//		std::cout << "What weight? ";
+		std::cout << "\n\tNote: Type 0 for a random weight for each edge, between 1 and 10." << std::endl;
+		std::cout << "What weight? ";
 		std::cin >> edgeWeight;
 		std::cout << "How many games would you like to play?: ";
 		std::cin >> numGamesToPlay;

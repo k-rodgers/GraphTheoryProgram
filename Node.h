@@ -22,6 +22,8 @@ public:
     Node* getMinimalDegreeNode();
     void removeEdgeWeight(Node*, int);
     void setDegree();
+    void cleanup();
+    bool edgeExists(Node*);
 	
 private:
 	int name;

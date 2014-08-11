@@ -60,67 +60,134 @@ Hypercube3Random::~Hypercube3Random()
 //Desc: Creates the initial edges
 void Hypercube3Random::createInitialEdges()
 {
-	std::list<Node*>::iterator iter1 = nodeList.begin();    // 1
-	std::list<Node*>::iterator iter2 = nodeList.begin();
-	std::advance(iter2, 1);                                 // 2
-	(*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 4
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 1);                                 // 5
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter1, 1);                                 // 2
-    iter2 = nodeList.begin();                               // 1
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 3
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 3);                                 // 5
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter1, 1);                                 // 3
-    iter2 = nodeList.begin();
-    std::advance(iter2, 1);                                 // 2
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 4
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 3);                                 // 7
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter1, 1);                                 // 4
-    iter2 = nodeList.begin();                               // 1
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 3
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 5);                                 // 8
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter1, 1);                                 // 5
-    iter2 = nodeList.begin();                               // 1
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 5);                                 // 6
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 8
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter1, 1);                                 // 6
-    iter2 = nodeList.begin();
-    std::advance(iter2, 1);                                 // 2
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 3);                                 // 5
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 7
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter1, 1);                                 // 7
-    iter2 = nodeList.begin();
-    std::advance(iter2, 2);                                 // 3
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 3);                                 // 6
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 8
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter1, 1);                                 // 8
-    iter2 = nodeList.begin();
-    std::advance(iter2, 3);                                 // 4
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 1);                                 // 5
-    (*iter1)->setEdge(*iter2, edgeWeight);
-    std::advance(iter2, 2);                                 // 7
-    (*iter1)->setEdge(*iter2, edgeWeight);
+	if (edgeWeight == 0)
+    {
+        std::list<Node*>::iterator iter1 = nodeList.begin();    // 1
+        std::list<Node*>::iterator iter2 = nodeList.begin();
+        std::advance(iter2, 1);                                 // 2
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 4
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 1);                                 // 5
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter1, 1);                                 // 2
+        iter2 = nodeList.begin();                               // 1
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 3
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 3);                                 // 5
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter1, 1);                                 // 3
+        iter2 = nodeList.begin();
+        std::advance(iter2, 1);                                 // 2
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 4
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 3);                                 // 7
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter1, 1);                                 // 4
+        iter2 = nodeList.begin();                               // 1
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 3
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 5);                                 // 8
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter1, 1);                                 // 5
+        iter2 = nodeList.begin();                               // 1
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 5);                                 // 6
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 8
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter1, 1);                                 // 6
+        iter2 = nodeList.begin();
+        std::advance(iter2, 1);                                 // 2
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 3);                                 // 5
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 7
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter1, 1);                                 // 7
+        iter2 = nodeList.begin();
+        std::advance(iter2, 2);                                 // 3
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 3);                                 // 6
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 8
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter1, 1);                                 // 8
+        iter2 = nodeList.begin();
+        std::advance(iter2, 3);                                 // 4
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 1);                                 // 5
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        std::advance(iter2, 2);                                 // 7
+        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+    }
+    else
+    {
+        std::list<Node*>::iterator iter1 = nodeList.begin();    // 1
+        std::list<Node*>::iterator iter2 = nodeList.begin();
+        std::advance(iter2, 1);                                 // 2
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 4
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 1);                                 // 5
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter1, 1);                                 // 2
+        iter2 = nodeList.begin();                               // 1
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 3
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 3);                                 // 5
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter1, 1);                                 // 3
+        iter2 = nodeList.begin();
+        std::advance(iter2, 1);                                 // 2
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 4
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 3);                                 // 7
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter1, 1);                                 // 4
+        iter2 = nodeList.begin();                               // 1
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 3
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 5);                                 // 8
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter1, 1);                                 // 5
+        iter2 = nodeList.begin();                               // 1
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 5);                                 // 6
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 8
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter1, 1);                                 // 6
+        iter2 = nodeList.begin();
+        std::advance(iter2, 1);                                 // 2
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 3);                                 // 5
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 7
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter1, 1);                                 // 7
+        iter2 = nodeList.begin();
+        std::advance(iter2, 2);                                 // 3
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 3);                                 // 6
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 8
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter1, 1);                                 // 8
+        iter2 = nodeList.begin();
+        std::advance(iter2, 3);                                 // 4
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 1);                                 // 5
+        (*iter1)->setEdge(*iter2, edgeWeight);
+        std::advance(iter2, 2);                                 // 7
+        (*iter1)->setEdge(*iter2, edgeWeight);
+    }
 }
 
 //Desc: Creates the initial Nodes

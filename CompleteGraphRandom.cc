@@ -57,7 +57,10 @@ void CompleteGraphRandom::createInitialEdges()
 		{
 			if ((iter1) != (iter2))
 			{
-				(*iter1)->setEdge(*iter2, edgeWeight);
+				if (edgeWeight == 0)
+                    (*iter1)->setEdge(*iter2, getRandomNumber(10));
+                else
+                    (*iter1)->setEdge(*iter2, edgeWeight);
 			}
 		}
 	}

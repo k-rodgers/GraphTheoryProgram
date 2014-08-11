@@ -20,8 +20,9 @@
 #include "RandomEngine.h"
 
 //	This is the .cc file for the CompleteGraphLogical object.
-
-/*	Constructor for the CompleteGraphLogical. Takes three ints: i, numNodes, weight,
+const std::string MATRIX_RESULTS = "output_data/matrix_results.txt";
+/*	
+ *  Constructor for the CompleteGraphLogical. Takes three ints: i, numNodes, weight,
  *	and a bool b and assigns initial values.
  */
 CompleteGraphLogical::CompleteGraphLogical(int i, int numNodes, int weight, bool b, int k)
@@ -50,17 +51,78 @@ CompleteGraphLogical::~CompleteGraphLogical()
 
 //	Creates the initial edges
 void CompleteGraphLogical::createInitialEdges()
-{
-	for (std::list<Node*>::iterator iter1 = nodeList.begin(); iter1 != nodeList.end(); iter1++)
+{	if (edgeWeight == 0)
 	{
-		for (std::list<Node*>::iterator iter2 = nodeList.begin(); iter2 != nodeList.end(); iter2++)
+    	int randomEdgeValue = 0;
+	    for (std::list<Node*>::iterator iter1 = nodeList.begin(); iter1 != nodeList.end(); iter1++)
+    	{
+        	for (std::list<Node*>::iterator iter2 = nodeList.begin(); iter2 != nodeList.end(); iter2++)
+	        {
+    	        
+        	    if ((iter1) != (iter2) && !((*iter1)->edgeExists(*iter2)))
+            	{
+                	randomEdgeValue = getRandomEdge(10);
+	                (*iter1)->setEdge(*iter2, randomEdgeValue);
+    	            (*iter2)->setEdge(*iter1, randomEdgeValue);
+        	    }
+	        }
+    	}
+	}
+	else	
+	{	
+	    for (std::list<Node*>::iterator iter1 = nodeList.begin(); iter1 != nodeList.end(); iter1++)
 		{
-			if ((iter1) != (iter2))
+			for (std::list<Node*>::iterator iter2 = nodeList.begin(); iter2 != nodeList.end(); iter2++)
 			{
-				(*iter1)->setEdge(*iter2, edgeWeight);
+				if ((iter1) != (iter2))
+				{
+					(*iter1)->setEdge(*iter2, edgeWeight);
+				}
 			}
 		}
 	}
+	int matrix[nodeList.size()][nodeList.size()];
+	for (std::list<Node*>::iterator iter1 = nodeList.begin(); iter1 != nodeList.end(); iter1++)
+    {
+        for (std::list<Node*>::iterator iter2 = nodeList.begin(); iter2 != nodeList.end(); iter2++)
+	    {
+	        if ((*iter1)->edgeExists(*iter2))
+	        {
+	        	matrix[((*iter1)->getName())-1][((*iter2)->getName())-1] = (*iter1)->getWeight(*iter2);
+	        	matrix[((*iter2)->getName())-1][((*iter1)->getName())-1] = (*iter1)->getWeight(*iter2);
+	        }
+	        else
+	        {
+	        	matrix[((*iter1)->getName())-1][((*iter2)->getName())-1] = 0;
+	        	matrix[((*iter2)->getName())-1][((*iter1)->getName())-1] = 0;
+	        }
+	    }
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::ofstream matrix_output;
+	matrix_output.open(MATRIX_RESULTS.c_str(), std::ios_base::app);
+	matrix_output << "Game: " << gameNumber << std::endl;
+	std::cout << "Game " << gameNumber << std::endl;
+	std::cout << std::endl;
+	for (int i = 0; i < nodeList.size(); i++)
+	{
+		for (int j = 0; j < nodeList.size(); j++)
+		{
+			if (matrix[i][j] < 10)
+			{
+				std::cout << matrix[i][j] << "  ";
+				matrix_output << matrix[i][j] << "  ";
+			}
+			else
+			{
+				std::cout << matrix[i][j] << " ";
+				matrix_output << matrix[i][j] << " ";
+			}
+		}
+		std::cout << std::endl;
+		matrix_output << std::endl;
+	}	
 }
 
 //Desc: Creates the initial Nodes
@@ -156,19 +218,20 @@ void CompleteGraphLogical::rotateBar()
 
 void CompleteGraphLogical::game()
 {
-/*    std::cout << edgeWeight << std::endl;
-	for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
-        std::cout << (*iter)->getDegree() << std::endl;
-*/    std::ofstream master_data;
+//    std::cout << edgeWeight << std::endl;
+//	for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
+//        std::cout << (*iter)->getDegree() << std::endl;
+    std::ofstream master_data;
 	//master_data.open("logs/log.txt");
 	
 	
 	//std::string moves;
 //	std::string gameName = std::to_string(i) + ".txt";
 	std::string master_data_path = "output_data/master_data.txt";
-	
+	std::ofstream matrix_data;
 //	master_data.open(path+gameName);
 	master_data.open(master_data_path.c_str(), std::ios_base::app);
+	matrix_data.open(MATRIX_RESULTS.c_str(), std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();
 	Node* nextMoveNode;
 	Token* t = new Token(*iter1);
@@ -177,28 +240,34 @@ void CompleteGraphLogical::game()
 	int nextMove = 0;
 	if (watch == true)
 	{
-		std::cout << "Game " << gameNumber << std::endl;
-		std::cout << std::endl;
 		master_data << (t->getTokenLocation())->getName() << "-";
 		while (true)
 		{
+            
             if (t->getCurrentPlayerTurn() == 2)
             {
                 nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize());
                 nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);
+                edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
+                nextRandomWeight = getRandomEdge(edgeSize);
             }
             else
-                nextMoveNode = t->getTokenLocation()->getMinimalDegreeNode();     // sets node at based in this number
-	        edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
-            nextRandomWeight = getRandomEdge(edgeSize);
-            nextRandomWeight = 1;
-            if (nextRandomWeight == 0)
-		    {
-		    	t->getTokenLocation()->destroyEdge(nextMoveNode);
-	    		nextMoveNode->destroyEdge(t->getTokenLocation());
-		    }
-            else if (nextRandomWeight > 0)
+            {
+                nextMoveNode = t->getTokenLocation()->getMinimalDegreeNode();
+                nextRandomWeight = t->getTokenLocation()->getWeight(nextMoveNode);
+    	    }
+            if (nextRandomWeight > 0)
         	{
+        		
+        		master_data << nextRandomWeight << "-";
+        		(t->getTokenLocation())->removeEdgeWeight(nextMoveNode, nextRandomWeight);
+	        	(nextMoveNode)->removeEdgeWeight(t->getTokenLocation(), nextRandomWeight);
+    		    std::cout << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
+    		    matrix_data << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
+    		    t->setPlayerTurn();
+	        	t->setTokenLocation(nextMoveNode);
+       			master_data << (t->getTokenLocation())->getName() << "-";
+/*        		
         		master_data << nextRandomWeight << "-";
         		(t->getTokenLocation())->setEdge(nextMoveNode, nextMoveNode->getWeight(t->getTokenLocation()) - nextRandomWeight);
 		        (nextMoveNode)->setEdge(t->getTokenLocation(), t->getTokenLocation()->getWeight(nextMoveNode) - nextRandomWeight);
@@ -207,7 +276,7 @@ void CompleteGraphLogical::game()
     	    	t->setPlayerTurn();
 		        t->setTokenLocation(nextMoveNode);
 		        master_data << (t->getTokenLocation())->getName() << "-";
-		    }
+*/		    }
     	    if (t->getTokenLocation()->getEdgeListSize() == 0)
 			{
 				//moves += std::to_string((t->getTokenLocation())->getName());
@@ -217,6 +286,7 @@ void CompleteGraphLogical::game()
 				master_data << t->getCurrentPlayerTurn() << std::endl;		
 				std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
 				std::cout << std::endl;
+				matrix_data << "Player" << t->getCurrentPlayerTurn() << " wins!\n" << std::endl;
                 delete t;
 				break;
 			}
@@ -236,16 +306,20 @@ void CompleteGraphLogical::game()
             {
                 nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize());
                 nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);
+                edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
+                nextRandomWeight = getRandomEdge(edgeSize);
             }
             else
+            {
                 nextMoveNode = t->getTokenLocation()->getMinimalDegreeNode();
-    	    edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
-        	nextRandomWeight = getRandomEdge(edgeSize);
+                nextRandomWeight = t->getTokenLocation()->getWeight(nextMoveNode);
+    	    }
             if (nextRandomWeight > 0)
     	    {
     	    	master_data << nextRandomWeight << "-";
         		(t->getTokenLocation())->removeEdgeWeight(nextMoveNode, nextRandomWeight);
 	        	(nextMoveNode)->removeEdgeWeight(t->getTokenLocation(), nextRandomWeight);
+	        	matrix_data << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
     		    t->setPlayerTurn();
 	        	t->setTokenLocation(nextMoveNode);
        			master_data << (t->getTokenLocation())->getName() << "-";
@@ -260,9 +334,10 @@ void CompleteGraphLogical::game()
 				//moves += std::to_string((t->getTokenLocation())->getName());
 				t->setPlayerTurn();
 //				std::cout << std::endl;
+				matrix_data << t->getCurrentPlayerTurn() << std::endl;		
 				//master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
 				master_data << t->getCurrentPlayerTurn() << std::endl;		
-//				std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
+				matrix_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n" << std::endl;
 //				std::cout << std::endl;
                 delete t;
 				break;

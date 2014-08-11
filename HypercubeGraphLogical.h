@@ -1,13 +1,7 @@
-//
-//  Hypercube4Logical.h
-//  CPPWeightedLogical
-//
-//  Created by Kyle Rodgers on 7/7/14.
-//  Copyright (c) 2014 KMRodgers. All rights reserved.
-//
+//HypercubeGraphLogical.h
 
-#ifndef GUARD_Hypercube4Logical_h
-#define GUARD_Hypercube4Logical_h
+#ifndef GUARD_HypercubeGraphLogical_h
+#define GUARD_HypercubeGraphLogical_h
 
 #include <list>
 #include <vector>
@@ -16,10 +10,10 @@
 
 class Node;
 
-class Hypercube4Logical {
+class HypercubeGraphLogical {
 public:
-	Hypercube4Logical(int, int, bool, int);
-	virtual ~Hypercube4Logical();
+	HypercubeGraphLogical(int, int, bool, int, int);
+	virtual ~HypercubeGraphLogical();
 	void createInitialEdges();
 	void createInitialNodes(int);
 	void removeEdge();
@@ -31,14 +25,15 @@ public:
 	//void analysis(int);
     int getRandomNumber(int);
     int getRandomEdge(int);
-    void setLowestEdge();
     int gameNumber;
+    int getnumberOfNodes();
     
 private:
 	int nodeNameCount; //Keeps track of what the name of the next Node will be
 	int edgeWeight;
 	int totalGames;
-    int lowestEdge;
+    int numberOfNodes;
+    int dimension;
 	bool watch;
 	void rotateBar();
 	int barCount;
