@@ -1,5 +1,4 @@
-#ifndef GUARD_Engine_h
-#define GUARD_Engine_h
+#pragma once
 
 #include <string>
 
@@ -29,5 +28,3 @@ private:
 //	void parsePlayerLogicalData();
 	void dataAnalysis(int);
 };
-
-#endif

@@ -1,7 +1,4 @@
-//Hypercube2Logical.h
-
-#ifndef GUARD_Hypercube2Logical_h
-#define GUARD_Hypercube2Logical_h
+#pragma once
 
 #include <list>
 #include <vector>
@@ -37,5 +34,3 @@ private:
 	std::list<Node*> nodeList;
 
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef GUARD_Node_h
-#define GUARD_Node_h
+#pragma once
 
 #include <map>
 
@@ -30,8 +29,6 @@ private:
     int degree;
 
 };
-
-#endif
 
 //Goals
 //Printouts

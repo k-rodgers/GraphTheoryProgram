@@ -1,5 +1,4 @@
-#ifndef __RANDOMENGINE_H__
-#define __RANDOMENGINE_H__
+#pragma once
 
 extern "C" {
 #include <uuid/uuid.h>
@@ -116,8 +115,6 @@ class RandomEngine {
   static RandomEngine *__instance;
 
 };
-
-#endif /* __RANDOMENGINE_H__ */
 
 
 ////////

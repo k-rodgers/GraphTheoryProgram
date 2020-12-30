@@ -1,7 +1,4 @@
-//HypercubeGraphLogical.h
-
-#ifndef GUARD_HypercubeGraphLogical_h
-#define GUARD_HypercubeGraphLogical_h
+#pragma once
 
 #include <list>
 #include <vector>
@@ -40,5 +37,3 @@ private:
 	std::list<Node*> nodeList;
 
 };
-
-#endif

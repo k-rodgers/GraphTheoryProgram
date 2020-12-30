@@ -1,5 +1,4 @@
-#ifndef GUARD_CompleteGraphLogical_h
-#define GUARD_CompleteGraphLogical_h
+#pragma once
 
 #include <list>
 #include <vector>
@@ -35,5 +34,3 @@ private:
 	std::list<Node*> nodeList;
 
 };
-
-#endif

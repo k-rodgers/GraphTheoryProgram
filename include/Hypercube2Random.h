@@ -1,7 +1,4 @@
-//Hypercube2Random.h
-
-#ifndef GUARD_Hypercube2Random_h
-#define GUARD_Hypercube2Random_h
+#pragma once
 
 #include <list>
 #include <vector>
@@ -37,5 +34,3 @@ private:
 	std::list<Node*> nodeList;
 
 };
-
-#endif

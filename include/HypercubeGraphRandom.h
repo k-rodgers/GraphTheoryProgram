@@ -1,7 +1,4 @@
-//HypercubeGraphRandom.h
-
-#ifndef GUARD_HypercubeGraphRandom_h
-#define GUARD_HypercubeGraphRandom_h
+#pragma once
 
 #include <list>
 #include <vector>
@@ -39,5 +36,3 @@ private:
 	std::list<Node*> nodeList;
 
 };
-
-#endif

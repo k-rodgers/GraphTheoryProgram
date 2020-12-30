@@ -1,5 +1,4 @@
-#ifndef GUARD_Token_h
-#define GUARD_Token_h
+#pragma once
 
 #include "Node.h"
 
@@ -16,8 +15,6 @@ private:
 	Node* location;
 	int playerTurn;
 };
-
-#endif
 
 //build game state by providing Surface*, have it translate and populate the game data
 //Multiple Surface*

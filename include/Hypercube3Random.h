@@ -1,13 +1,4 @@
-//
-//  Hypercube3Random.h
-//  CPPWeightedLogical
-//
-//  Created by Kyle Rodgers on 7/7/14.
-//  Copyright (c) 2014 KMRodgers. All rights reserved.
-//
-
-#ifndef GUARD_Hypercube3Random_h
-#define GUARD_Hypercube3Random_h
+#pragma once
 
 #include <list>
 #include <vector>
@@ -43,5 +34,3 @@ private:
 	std::list<Node*> nodeList;
 
 };
-
-#endif
