@@ -2,13 +2,17 @@
 
 set -e
 
-INCLUDE="-I../include/"
+INCLUDE=""
 
 #rm -r output_data
 rm -r build && true
 rm gtp && true
 mkdir -p build
 pushd build > /dev/null
+for x in $(find ../include/ -type d); do
+    INCLUDE="$INCLUDE -I$x"
+done
+
 for x in $(find ../src | grep \\.cpp); do
     #g++ ${INCLUDE} -std=c++17 -c ../src/$x
     COMMAND="g++ ${INCLUDE} -std=c++17 -c $x -luuid"
