@@ -1,19 +1,19 @@
 #!/bin/bash
 
-rm -r output_data
-g++ -std=c++11 -c Engine.cc
-g++ -std=c++11 -c Node.cc
-g++ -std=c++11 -c PetersenGraphRandom.cc
-g++ -std=c++11 -c CompleteGraphRandom.cc
-g++ -std=c++11 -c Hypercube2Random.cc
-g++ -std=c++11 -c Hypercube3Random.cc
-g++ -std=c++11 -c Hypercube4Random.cc
-g++ -std=c++11 -c PetersenGraphLogical.cc
-g++ -std=c++11 -c CompleteGraphLogical.cc
-g++ -std=c++11 -c Hypercube2Logical.cc
-g++ -std=c++11 -c Hypercube3Logical.cc
-g++ -std=c++11 -c Hypercube4Logical.cc
-g++ -std=c++11 -c Token.cc
-g++ -std=c++11 -c RandomEngine.cc
-g++ -std=c++11 *.o main.cc -o main
+INCLUDE="-I../include/"
+
+#rm -r output_data
+rm -r build
+rm gtp
+mkdir -p build
+pushd build > /dev/null
+for x in $(ls ../src); do
+    #g++ ${INCLUDE} -std=c++17 -c ../src/$x
+    COMMAND="g++ ${INCLUDE} -std=c++17 -luuid -c ../src/$x"
+    echo $COMMAND
+    eval ${COMMAND}
+done
+rm main.o
+popd > /dev/null
+g++ -I./include/ -std=c++17 -g build/*.o src/main.cpp -o gtp
 mkdir -p output_data
