@@ -244,7 +244,7 @@ void Hypercube3Random::print()
 
 int Hypercube3Random::getRandomNumber(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)(r * size);
@@ -263,7 +263,7 @@ void Hypercube3Random::rotateBar()
 	if (whichOne == 3)
 	{
 		std::cout << '\r' << barspin[whichOne] << "  Please wait while the games are played. Game: " << gameNumber << " " << (int)(((double)gameNumber/totalGames)*100.0) << "% complete";
-        
+
 	}
 	else
 	{
@@ -275,7 +275,7 @@ void Hypercube3Random::rotateBar()
 
 int Hypercube3Random::getRandomEdge(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)((r * size)+1);
@@ -289,12 +289,12 @@ void Hypercube3Random::game()
      std::cout << (*iter)->getDegree() << std::endl;
      */    std::ofstream master_data;
 	//master_data.open("logs/log.txt");
-	
-	
+
+
 	//std::string moves;
     //	std::string gameName = std::to_string(i) + ".txt";
 	std::string master_data_path = "output_data/master_data.txt";
-	
+
     //	master_data.open(path+gameName);
 	master_data.open(master_data_path.c_str(), std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();
@@ -401,7 +401,7 @@ void Hypercube3Random::game()
 }
 
 /*
- 
+
  while (true)
  {
  nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize()); // inside () returns an int the size of possible nodes to go to

@@ -11,8 +11,8 @@ extern "C" {
  * @class  RandomEngine
  * @author Nathan Grau (ngrau@augie.edu)
  * @date   May 2014
- * 
- * @brief  Singleton class for high periodicity Mersenne Twistor. 
+ *
+ * @brief  Singleton class for high periodicity Mersenne Twistor.
  *         Stolen mostly from ROOT TRandom3. See documentation therein.
  *
  */
@@ -69,7 +69,7 @@ class RandomEngine {
     y ^= ((y << 15) & kTemperingMaskC );
     y ^=  (y >> 18);
 
-    // 2.3283064365386963e-10 == 1./(max<UINt_t>+1)  -> then returned value cannot be = 1.0  
+    // 2.3283064365386963e-10 == 1./(max<UINt_t>+1)  -> then returned value cannot be = 1.0
     if (y) return ( (double) y * 2.3283064365386963e-10); // * Power(2,-32)
     return getRandom();
   }
@@ -95,8 +95,8 @@ class RandomEngine {
     }
   }
 
-  /** 
-   * @brief The generator seed 
+  /**
+   * @brief The generator seed
    */
   int _seed;
 
@@ -110,8 +110,8 @@ class RandomEngine {
    */
   int _count;
 
-  /** 
-   * @brief The singleton 
+  /**
+   * @brief The singleton
    */
   static RandomEngine *__instance;
 

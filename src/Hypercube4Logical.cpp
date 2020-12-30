@@ -123,7 +123,7 @@ void Hypercube4Logical::createInitialEdges()
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
         std::advance(iter2, 2);                                 // 7
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        
+
         iter1 = nodeList.begin();                               // 1
         iter2 = nodeList.begin();
         std::advance(iter1, 8);
@@ -189,7 +189,7 @@ void Hypercube4Logical::createInitialEdges()
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
         std::advance(iter2, 2);                                 // 7
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        
+
         iter1 = nodeList.begin();                               // 1
         iter2 = nodeList.begin();
         std::advance(iter2, 8);
@@ -287,7 +287,7 @@ void Hypercube4Logical::createInitialEdges()
         (*iter1)->setEdge(*iter2, edgeWeight);
         std::advance(iter2, 2);                                 // 7
         (*iter1)->setEdge(*iter2, edgeWeight);
-        
+
         iter1 = nodeList.begin();                               // 1
         iter2 = nodeList.begin();
         std::advance(iter1, 8);
@@ -353,7 +353,7 @@ void Hypercube4Logical::createInitialEdges()
         (*iter1)->setEdge(*iter2, edgeWeight);
         std::advance(iter2, 2);                                 // 7
         (*iter1)->setEdge(*iter2, edgeWeight);
-        
+
         iter1 = nodeList.begin();                               // 1
         iter2 = nodeList.begin();
         std::advance(iter2, 8);
@@ -444,7 +444,7 @@ void Hypercube4Logical::print()
 
 int Hypercube4Logical::getRandomNumber(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)((r * size)+1);
@@ -463,7 +463,7 @@ void Hypercube4Logical::rotateBar()
 	if (whichOne == 3)
 	{
 		std::cout << '\r' << barspin[whichOne] << "  Please wait while the games are played. Game: " << gameNumber << " " << (int)(((double)gameNumber/totalGames)*100.0) << "% complete";
-        
+
 	}
 	else
 	{
@@ -475,7 +475,7 @@ void Hypercube4Logical::rotateBar()
 
 int Hypercube4Logical::getRandomEdge(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)((r * size)+1);
@@ -484,7 +484,7 @@ int Hypercube4Logical::getRandomEdge(int size)
 
 void Hypercube4Logical::setLowestEdge()
 {
-    
+
 }
 
 void Hypercube4Logical::game()
@@ -494,12 +494,12 @@ void Hypercube4Logical::game()
      std::cout << (*iter)->getDegree() << std::endl;
      */    std::ofstream master_data;
 	//master_data.open("logs/log.txt");
-	
-	
+
+
 	//std::string moves;
     //	std::string gameName = std::to_string(i) + ".txt";
 	std::string master_data_path = "output_data/master_data.txt";
-	
+
     //	master_data.open(path+gameName);
 	master_data.open(master_data_path.c_str(), std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();
@@ -606,7 +606,7 @@ void Hypercube4Logical::game()
 }
 
 /*
- 
+
  while (true)
  {
  nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize()); // inside () returns an int the size of possible nodes to go to

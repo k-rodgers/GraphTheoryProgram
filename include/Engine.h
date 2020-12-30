@@ -9,7 +9,7 @@ public:
 	int p1size;
 	int p2size;
 	int longestGame;
-	   
+
 private:
 	void printIntro();
 	void printStartMenu();

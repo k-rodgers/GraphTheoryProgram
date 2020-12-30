@@ -24,11 +24,11 @@ public:
     void setDegree();
     void cleanup();
     bool edgeExists(Node*);
-	
+
 private:
 	int name;
     int degree;
-	
+
 };
 
 #endif
@@ -53,11 +53,11 @@ private:
 //Unix parsers already exist?
 
 //more results | sort -u
-//-u flag puts 
+//-u flag puts
 
 //parse into all unique games vs unique player 1 wins, into sort
 
-//saving game states for analysis afterward 
+//saving game states for analysis afterward
 //vector of game state after each move
 
 //more sophisticated analysis afterward

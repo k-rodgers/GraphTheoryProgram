@@ -3,8 +3,8 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
-#include <fstream>	
-//#include <boolean>					
+#include <fstream>
+//#include <boolean>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -274,7 +274,7 @@ void PetersenGraphRandom::print()
 
 int PetersenGraphRandom::getRandomNumber(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)(r * size);
@@ -305,7 +305,7 @@ void PetersenGraphRandom::rotateBar()
 
 int PetersenGraphRandom::getRandomEdge(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)((r * size)+1);
@@ -319,12 +319,12 @@ void PetersenGraphRandom::game()
      std::cout << (*iter)->getDegree() << std::endl;
      */    std::ofstream master_data;
 	//master_data.open("logs/log.txt");
-	
-	
+
+
 	//std::string moves;
     //	std::string gameName = std::to_string(i) + ".txt";
 	std::string master_data_path = "output_data/master_data.txt";
-	
+
     //	master_data.open(path+gameName);
 	master_data.open(master_data_path.c_str(), std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();

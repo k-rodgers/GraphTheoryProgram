@@ -65,7 +65,7 @@ HypercubeGraphLogical::~HypercubeGraphLogical()
 void HypercubeGraphLogical::createInitialEdges()
 {
     int creationMatrix [numberOfNodes][numberOfNodes];
-    
+
     int dim3size = (int)pow(2,3);
     int dim4size = (int)pow(2,4);
     int dim5size = (int)pow(2,5);
@@ -73,7 +73,7 @@ void HypercubeGraphLogical::createInitialEdges()
     int dim7size = (int)pow(2,7);
     int dim8size = (int)pow(2,8);
     int dim9size = (int)pow(2,9);
-    
+
     int dim3 [dim3size][dim3size];
     int dim4 [dim4size][dim4size];
     int dim5 [dim5size][dim5size];
@@ -81,7 +81,7 @@ void HypercubeGraphLogical::createInitialEdges()
     int dim7 [dim7size][dim7size];
     int dim8 [dim8size][dim8size];
     int dim9 [dim9size][dim9size];
-    
+
     if (dimension <= 3)
     {
         for (int i = 0; i < numberOfNodes; i++)
@@ -214,7 +214,7 @@ void HypercubeGraphLogical::createInitialEdges()
             col++;
         }
     }
-    
+
     for (int i = 0; i < numberOfNodes; i++)
     {
         for (int j = 0; j < numberOfNodes; j++)
@@ -292,7 +292,7 @@ void HypercubeGraphLogical::print()
 
 int HypercubeGraphLogical::getRandomNumber(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)(r * size);
@@ -316,7 +316,7 @@ void HypercubeGraphLogical::rotateBar()
 	if (whichOne == 3)
 	{
 		std::cout << '\r' << barspin[whichOne] << "  Please wait while the games are played. Game: " << gameNumber << " " << (int)(((double)gameNumber/totalGames)*100.0) << "% complete";
-        
+
 	}
 	else
 	{
@@ -328,7 +328,7 @@ void HypercubeGraphLogical::rotateBar()
 
 int HypercubeGraphLogical::getRandomEdge(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)((r * size)+1);
@@ -342,12 +342,12 @@ void HypercubeGraphLogical::game()
      std::cout << (*iter)->getDegree() << std::endl;
      */    std::ofstream master_data;
 	//master_data.open("logs/log.txt");
-	
-	
+
+
 	//std::string moves;
     //	std::string gameName = std::to_string(i) + ".txt";
 	std::string master_data_path = "output_data/master_data.txt";
-	
+
     //	master_data.open(path+gameName);
 	master_data.open(master_data_path.c_str(), std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();
@@ -454,8 +454,8 @@ void HypercubeGraphLogical::game()
 }
 
 /*
- 
+
  To do: global variables of arrays, array size? That way, can pass pointers and array size to loops ((int)power(2, x)).
  Hash table to say "I want array 3 and it returns pointer to array"
- 
+
  */

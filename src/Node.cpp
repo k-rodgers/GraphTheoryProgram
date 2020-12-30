@@ -65,7 +65,7 @@ Node* Node::getMinimalDegreeNode()
     }
     return minimalDegreeNode->first;
 }
- 
+
 Node* Node::getNodeAtElement(int i)
 {
     setDegree();

@@ -175,7 +175,7 @@ void Engine::startMenuChoices(int choice)
         else if (watchChoice == "n" || watchChoice == "N")
             watch = false;
 		createHypercubeGraph(numGamesToPlay, edgeWeight, dimension, watch, random);
-	}	
+	}
     else if (choice == 9)
     {
         std::cout << "Thank you for using this program!" << std::endl;
@@ -230,8 +230,8 @@ void Engine::parseMasterData()
 	std::cout << "\nData sorted by player successfully!" << std::endl;
 	p1.close();
 	p2.close();
-	master.close();	
-}	
+	master.close();
+}
 /*
 void Engine::parsePlayerLogicalData()
 {
@@ -355,7 +355,7 @@ void Engine::dataAnalysis(int choice)
 			std::cout << i->first << " " << i->second << std::endl;
 			results << i->first << " " << i->second << std::endl;
 	//		if (i->size() > longestGame)
-	//			longestGame = i->size();	
+	//			longestGame = i->size();
 		}
 		std::cout << std::endl;
 		results << std::endl;
@@ -378,7 +378,7 @@ void Engine::dataAnalysis(int choice)
 		{
             results << i->first << " " << i->second << std::endl;
 	//		if (i->size() > longestGame)
-	//			longestGame = i->size();	
+	//			longestGame = i->size();
 		}
 		results << std::endl;
 		results << "The following moves led to Player 2's victory:" << std::endl;
@@ -528,7 +528,7 @@ void Engine::createPetersenGraph(int choice, int edgeWeight, bool watch, bool ra
 		std::cout << "Time to completion: " << timeInMinutes << ":0" << secondsRemaining << std::endl;
 		std::cout << std::endl;
 	}
-	std::cout << "This calculation took exactly " << timeInSeconds << " seconds." << std::endl;		
+	std::cout << "This calculation took exactly " << timeInSeconds << " seconds." << std::endl;
 	std::cout << std::endl;
 }
 
@@ -659,6 +659,6 @@ void Engine::createHypercubeGraph(int numGames, int edgeWeight, int dimensions, 
 		std::cout << "Time to completion: " << timeInMinutes << ":0" << secondsRemaining << std::endl;
 		std::cout << std::endl;
 	}
-	std::cout << "This calculation took exactly " << timeInSeconds << " seconds." << std::endl;		
+	std::cout << "This calculation took exactly " << timeInSeconds << " seconds." << std::endl;
 	std::cout << std::endl;
 }

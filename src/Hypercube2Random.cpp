@@ -5,8 +5,8 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
-#include <fstream>	
-//#include <boolean>					
+#include <fstream>
+//#include <boolean>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -154,7 +154,7 @@ void Hypercube2Random::print()
 
 int Hypercube2Random::getRandomNumber(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)(r * size);
@@ -185,7 +185,7 @@ void Hypercube2Random::rotateBar()
 
 int Hypercube2Random::getRandomEdge(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)((r * size)+1);
@@ -199,12 +199,12 @@ void Hypercube2Random::game()
      std::cout << (*iter)->getDegree() << std::endl;
      */    std::ofstream master_data;
 	//master_data.open("logs/log.txt");
-	
-	
+
+
 	//std::string moves;
     //	std::string gameName = std::to_string(i) + ".txt";
 	std::string master_data_path = "output_data/master_data.txt";
-	
+
     //	master_data.open(path+gameName);
 	master_data.open(master_data_path.c_str(), std::ios_base::app);
 	std::list<Node*>::iterator iter1 = nodeList.begin();
@@ -338,7 +338,7 @@ while (true)
 			t->setPlayerTurn();
 			std::cout << std::endl;
 			//master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
-			master_data << t->getCurrentPlayerTurn() << std::endl;		
+			master_data << t->getCurrentPlayerTurn() << std::endl;
 			std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
 			std::cout << std::endl;
 			break;

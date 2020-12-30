@@ -11,7 +11,7 @@ public:
 	void setTokenLocation(Node*);
 	int getCurrentPlayerTurn();
 	void setPlayerTurn();
-	
+
 private:
 	Node* location;
 	int playerTurn;
@@ -20,7 +20,7 @@ private:
 #endif
 
 //build game state by providing Surface*, have it translate and populate the game data
-//Multiple Surface* 
+//Multiple Surface*
 //Class GameState
 //overloading casting operation
 //Surface* operator(Surface*)(){

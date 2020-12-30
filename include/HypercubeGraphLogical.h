@@ -27,7 +27,7 @@ public:
     int getRandomEdge(int);
     int gameNumber;
     int getnumberOfNodes();
-    
+
 private:
 	int nodeNameCount; //Keeps track of what the name of the next Node will be
 	int edgeWeight;
@@ -38,7 +38,7 @@ private:
 	void rotateBar();
 	int barCount;
 	std::list<Node*> nodeList;
-	
+
 };
 
 #endif

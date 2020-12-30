@@ -21,7 +21,7 @@
 
 //	This is the .cc file for the CompleteGraphLogical object.
 const std::string MATRIX_RESULTS = "output_data/matrix_results.txt";
-/*	
+/*
  *  Constructor for the CompleteGraphLogical. Takes three ints: i, numNodes, weight,
  *	and a bool b and assigns initial values.
  */
@@ -58,7 +58,7 @@ void CompleteGraphLogical::createInitialEdges()
     	{
         	for (std::list<Node*>::iterator iter2 = nodeList.begin(); iter2 != nodeList.end(); iter2++)
 	        {
-    	        
+
         	    if ((iter1) != (iter2) && !((*iter1)->edgeExists(*iter2)))
             	{
                 	randomEdgeValue = getRandomEdge(10);
@@ -68,8 +68,8 @@ void CompleteGraphLogical::createInitialEdges()
 	        }
     	}
 	}
-	else	
-	{	
+	else
+	{
 	    for (std::list<Node*>::iterator iter1 = nodeList.begin(); iter1 != nodeList.end(); iter1++)
 		{
 			for (std::list<Node*>::iterator iter2 = nodeList.begin(); iter2 != nodeList.end(); iter2++)
@@ -122,7 +122,7 @@ void CompleteGraphLogical::createInitialEdges()
 		}
 		std::cout << std::endl;
 		matrix_output << std::endl;
-	}	
+	}
 }
 
 //Desc: Creates the initial Nodes
@@ -182,7 +182,7 @@ void CompleteGraphLogical::print()
 
 int CompleteGraphLogical::getRandomNumber(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)(r * size);
@@ -191,7 +191,7 @@ int CompleteGraphLogical::getRandomNumber(int size)
 
 int CompleteGraphLogical::getRandomEdge(int size)
 {
-	
+
 	RandomEngine *rand = RandomEngine::instance();
 	double r = rand->getRandom();
 	int randNum = (int)((r * size)+1);
@@ -223,8 +223,8 @@ void CompleteGraphLogical::game()
 //        std::cout << (*iter)->getDegree() << std::endl;
     std::ofstream master_data;
 	//master_data.open("logs/log.txt");
-	
-	
+
+
 	//std::string moves;
 //	std::string gameName = std::to_string(i) + ".txt";
 	std::string master_data_path = "output_data/master_data.txt";
@@ -243,7 +243,7 @@ void CompleteGraphLogical::game()
 		master_data << (t->getTokenLocation())->getName() << "-";
 		while (true)
 		{
-            
+
             if (t->getCurrentPlayerTurn() == 2)
             {
                 nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize());
@@ -258,7 +258,7 @@ void CompleteGraphLogical::game()
     	    }
             if (nextRandomWeight > 0)
         	{
-        		
+
         		master_data << nextRandomWeight << "-";
         		(t->getTokenLocation())->removeEdgeWeight(nextMoveNode, nextRandomWeight);
 	        	(nextMoveNode)->removeEdgeWeight(t->getTokenLocation(), nextRandomWeight);
@@ -267,7 +267,7 @@ void CompleteGraphLogical::game()
     		    t->setPlayerTurn();
 	        	t->setTokenLocation(nextMoveNode);
        			master_data << (t->getTokenLocation())->getName() << "-";
-/*        		
+/*
         		master_data << nextRandomWeight << "-";
         		(t->getTokenLocation())->setEdge(nextMoveNode, nextMoveNode->getWeight(t->getTokenLocation()) - nextRandomWeight);
 		        (nextMoveNode)->setEdge(t->getTokenLocation(), t->getTokenLocation()->getWeight(nextMoveNode) - nextRandomWeight);
@@ -283,7 +283,7 @@ void CompleteGraphLogical::game()
 				t->setPlayerTurn();
 				std::cout << std::endl;
 				//master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
-				master_data << t->getCurrentPlayerTurn() << std::endl;		
+				master_data << t->getCurrentPlayerTurn() << std::endl;
 				std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
 				std::cout << std::endl;
 				matrix_data << "Player" << t->getCurrentPlayerTurn() << " wins!\n" << std::endl;
@@ -334,9 +334,9 @@ void CompleteGraphLogical::game()
 				//moves += std::to_string((t->getTokenLocation())->getName());
 				t->setPlayerTurn();
 //				std::cout << std::endl;
-				matrix_data << t->getCurrentPlayerTurn() << std::endl;		
+				matrix_data << t->getCurrentPlayerTurn() << std::endl;
 				//master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
-				master_data << t->getCurrentPlayerTurn() << std::endl;		
+				master_data << t->getCurrentPlayerTurn() << std::endl;
 				matrix_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n" << std::endl;
 //				std::cout << std::endl;
                 delete t;
