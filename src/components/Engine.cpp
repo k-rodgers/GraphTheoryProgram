@@ -12,22 +12,12 @@
 #include "structures/hypercube/Hypercube3Logical.h"
 #include "structures/hypercube/Hypercube4Logical.h"
 
-#include <string>
 #include <cstdio>
 #include <ctime>
 #include <fstream>
 
 #include <vector>
 #include <map>
-
-const std::string MASTER_DATA_PATH = "output_data/master_data.txt";
-const std::string PLAYER1_DATA_PATH = "output_data/player1_moves.txt";
-const std::string PLAYER2_DATA_PATH = "output_data/player2_moves.txt";
-//const std::string PLAYER1_LOGICAL_DATA_PATH = "output_data/player1_logical_moves.txt";
-//const std::string PLAYER2_LOGICAL_DATA_PATH = "output_data/player2_logical_moves.txt";
-const std::string RESULTS_DATA_PATH = "output_data/results.txt";
-const std::string PLAYER1_UNIQUE_MOVES_DATA_PATH = "output_data/player1_unique_moves.txt";
-const std::string PLAYER2_UNIQUE_MOVES_DATA_PATH = "output_data/player2_unique_moves.txt";
 
 Engine::Engine()
 {
@@ -191,9 +181,9 @@ void Engine::parseMasterData()
 	std::ifstream master;
 	std::ofstream p1;
 	std::ofstream p2;
-	master.open(MASTER_DATA_PATH.c_str());
-	p1.open(PLAYER1_DATA_PATH.c_str(), std::ios_base::app);
-	p2.open(PLAYER2_DATA_PATH.c_str(), std::ios_base::app);
+	master.open(std::data(MASTER_DATA_PATH));
+	p1.open(std::data(PLAYER1_DATA_PATH), std::ios_base::app);
+	p2.open(std::data(PLAYER2_DATA_PATH), std::ios_base::app);
 	std::string parseLine;
 	//std::string::iterator iter = parseLine.end();
 	while (std::getline(master, parseLine))
@@ -270,11 +260,11 @@ void Engine::dataAnalysis(int choice)
 	std::ifstream p1;
 	std::ifstream p2;
 	std::ofstream results;
-	p1.open(PLAYER1_DATA_PATH.c_str());
-	p2.open(PLAYER2_DATA_PATH.c_str());
 //	p1_logical.open(player1_logical_ata_path);
 //	p2_logical.open(PLAYER2_LOGICAL_DATA_PATH);
-	results.open(RESULTS_DATA_PATH.c_str());
+	p1.open(std::data(PLAYER1_DATA_PATH));
+	p2.open(std::data(PLAYER2_DATA_PATH));
+	results.open(std::data(RESULTS_DATA_PATH));
 	std::string testLine;
 	std::map<std::string, int> player1moves;
 	std::map<std::string, int> player2moves;
