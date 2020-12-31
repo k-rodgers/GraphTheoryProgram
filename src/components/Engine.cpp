@@ -19,25 +19,22 @@
 #include <vector>
 #include <map>
 
-Engine::Engine()
+Engine::Engine(): choice(0), barCount(0)
 {
-	int choice = 0;
-	barCount = 0;
-	printIntro();
-	printStartMenu();
+	this->PrintIntro();
+	this->PrintStartMenu();
 	std::cin >> choice;
-	//startMenuList(choice);
-	startMenuChoices(choice);
+	this->StartMenuChoices(choice);
 }
 
-void Engine::printIntro()
+void Engine::PrintIntro()
 {
 	std::cout << std::endl;
 	std::cout << "Welcome to the Text-Based Graph Theory Logging Program" << std::endl;
 	std::cout << std::endl;
 }
 
-void Engine::printStartMenu()
+void Engine::PrintStartMenu()
 {
 	std::cout << "What type of graph would you like to use?" << std::endl;
 	std::cout << "1. Petersen Graph" << std::endl;
@@ -47,7 +44,7 @@ void Engine::printStartMenu()
 	std::cout << "Please enter your choice: ";
 }
 
-void Engine::startMenuChoices(int choice)
+void Engine::StartMenuChoices(int choice)
 {
 	int subMenuChoice = 0;
     int numGamesToPlay = 0;
@@ -89,7 +86,7 @@ void Engine::startMenuChoices(int choice)
             watch = true;
         else if (watchChoice == "n" || watchChoice == "N")
             watch = false;
-        createPetersenGraph(numGamesToPlay, edgeWeight, watch, random);
+        this->CreatePetersenGraph(numGamesToPlay, edgeWeight, watch, random);
 	}
 	else if (choice == 2)
 	{
@@ -126,7 +123,7 @@ void Engine::startMenuChoices(int choice)
             watch = true;
         else if (watchChoice == "n" || watchChoice == "N")
             watch = false;
-		createCompleteGraph(numGamesToPlay, numNodes, edgeWeight, watch, random);
+		this->CreateCompleteGraph(numGamesToPlay, numNodes, edgeWeight, watch, random);
 	}
 	else if (choice == 3)
 	{
@@ -164,7 +161,7 @@ void Engine::startMenuChoices(int choice)
             watch = true;
         else if (watchChoice == "n" || watchChoice == "N")
             watch = false;
-		createHypercubeGraph(numGamesToPlay, edgeWeight, dimension, watch, random);
+		this->CreateHypercubeGraph(numGamesToPlay, edgeWeight, dimension, watch, random);
 	}
     else if (choice == 9)
     {
@@ -173,7 +170,7 @@ void Engine::startMenuChoices(int choice)
     }
 }
 
-void Engine::parseMasterData()
+void Engine::ParseMasterData()
 {
 	longestGame = 0;
 	p1size = 0;
@@ -254,7 +251,8 @@ void Engine::parsePlayerLogicalData()
 	p2logical.close();
 }
 */
-void Engine::dataAnalysis(int choice)
+
+void Engine::DataAnalysis(int choice)
 {
 //	longestGame = 1;
 	std::ifstream p1;
@@ -272,7 +270,7 @@ void Engine::dataAnalysis(int choice)
 	std::map<std::string, int> player2logicalmoves;
 	while (std::getline(p1, testLine))
 	{
-		rotateBarAnalyzeP1();
+		this->RotateBarAnalyzeP1();
 		std::map<std::string, int>::iterator it = player1moves.find(testLine);
         if (it == player1moves.end())
             player1moves[testLine] = 1;
@@ -283,7 +281,7 @@ void Engine::dataAnalysis(int choice)
 	std::cout << "\nPlayer 1 data analyzed successfully!" << std::endl;
 	while (std::getline(p2, testLine))
 	{
-		rotateBarAnalyzeP2();
+		this->RotateBarAnalyzeP2();
         std::map<std::string, int>::iterator it = player2moves.find(testLine);
         if (it == player2moves.end())
             player2moves[testLine] = 1;
@@ -385,7 +383,7 @@ void Engine::dataAnalysis(int choice)
 	results.close();
 }
 
-void Engine::rotateBarParse()
+void Engine::RotateBarParse()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -403,7 +401,7 @@ void Engine::rotateBarParse()
 	return;
 }
 
-void Engine::rotateBarParsePlayer1()
+void Engine::RotateBarParsePlayer1()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -421,7 +419,7 @@ void Engine::rotateBarParsePlayer1()
 	return;
 }
 
-void Engine::rotateBarParsePlayer2()
+void Engine::RotateBarParsePlayer2()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -439,7 +437,7 @@ void Engine::rotateBarParsePlayer2()
 	return;
 }
 
-void Engine::rotateBarAnalyzeP1()
+void Engine::RotateBarAnalyzeP1()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -457,7 +455,7 @@ void Engine::rotateBarAnalyzeP1()
 	return;
 }
 
-void Engine::rotateBarAnalyzeP2()
+void Engine::RotateBarAnalyzeP2()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -475,7 +473,7 @@ void Engine::rotateBarAnalyzeP2()
 	return;
 }
 
-void Engine::createPetersenGraph(int choice, int edgeWeight, bool watch, bool random)
+void Engine::CreatePetersenGraph(int choice, int edgeWeight, bool watch, bool random)
 {
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << choice << std::endl;
@@ -492,8 +490,8 @@ void Engine::createPetersenGraph(int choice, int edgeWeight, bool watch, bool ra
             delete a;
         }
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
-	parseMasterData();
-	dataAnalysis(choice);
+	this->ParseMasterData();
+	this->DataAnalysis(choice);
 	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();
 	std::clock_t timeDelta = endTime - startTime;
@@ -522,7 +520,7 @@ void Engine::createPetersenGraph(int choice, int edgeWeight, bool watch, bool ra
 	std::cout << std::endl;
 }
 
-void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, bool watch, bool random)
+void Engine::CreateCompleteGraph(int numGames, int numNodes, int edgeWeight, bool watch, bool random)
 {
 	//int numberOfNodes = numNodes;
 	std::clock_t startTime = clock();
@@ -540,9 +538,9 @@ void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, boo
             delete a;
         }
     std::cout << "\n\n-----------------------------------------------\n" << std::endl;
-	parseMasterData();
+	this->ParseMasterData();
+	this->DataAnalysis(numGames);
 //	parsePlayerLogicalData();
-	dataAnalysis(numGames);
 	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();
 	std::clock_t timeDelta = endTime - startTime;
@@ -571,7 +569,7 @@ void Engine::createCompleteGraph(int numGames, int numNodes, int edgeWeight, boo
 	std::cout << std::endl;
 }
 
-void Engine::createHypercubeGraph(int numGames, int edgeWeight, int dimensions, bool watch, bool random)
+void Engine::CreateHypercubeGraph(int numGames, int edgeWeight, int dimensions, bool watch, bool random)
 {
 	//int numberOfNodes = numNodes;
 	std::clock_t startTime = clock();
@@ -622,9 +620,9 @@ void Engine::createHypercubeGraph(int numGames, int edgeWeight, int dimensions, 
             }
     }
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
-	parseMasterData();
+	this->ParseMasterData();
+	this->DataAnalysis(numGames);
 	//parsePlayerLogicalData();
-	dataAnalysis(numGames);
 	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();
 	std::clock_t timeDelta = endTime - startTime;
