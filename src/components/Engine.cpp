@@ -12,6 +12,8 @@
 #include "structures/hypercube/Hypercube3Logical.h"
 #include "structures/hypercube/Hypercube4Logical.h"
 
+#include "constants.h"
+
 #include <cstdio>
 #include <ctime>
 #include <fstream>
@@ -182,21 +184,15 @@ void Engine::ParseMasterData()
 	p1.open(std::data(PLAYER1_DATA_PATH), std::ios_base::app);
 	p2.open(std::data(PLAYER2_DATA_PATH), std::ios_base::app);
 	std::string parseLine;
-	//std::string::iterator iter = parseLine.end();
 	while (std::getline(master, parseLine))
 	{
-		rotateBarParse();
+		this->RotateBarParse();
 		std::string::iterator iter = (parseLine.end()-1);
-//		std::getline(master, parseLine);
-		//std::cout << parseLine << std::endl;
-		//std::cout << *(parseLine.end()-1) << "*" << std::endl;
 		if ((*iter) == '1')
 		{
 			p1size++;
             std::string p1ParseLine;
 			p1ParseLine = parseLine.substr(0, parseLine.size() - 2);
-            //parseLine.pop_back();
-			//parseLine.pop_back();
 			p1 << p1ParseLine << std::endl;
 			if (p1ParseLine.size() > longestGame)
 				longestGame = (int)p1ParseLine.size();
@@ -206,8 +202,6 @@ void Engine::ParseMasterData()
 			p2size++;
             std::string p2ParseLine;
 			p2ParseLine = parseLine.substr(0, parseLine.size() - 2);
-            //parseLine.pop_back();
-			//parseLine.pop_back();
 			p2 << p2ParseLine << std::endl;
 			if (p2ParseLine.size() > longestGame)
 				longestGame = (int)p2ParseLine.size();
@@ -219,47 +213,12 @@ void Engine::ParseMasterData()
 	p2.close();
 	master.close();
 }
-/*
-void Engine::parsePlayerLogicalData()
-{
-	std::ifstream p1;
-	std::ifstream p2;
-	std::ofstream p1logical;
-	std::ofstream p2logical;
-	p1.open(PLAYER1_DATA_PATH.c_str());
-	p2.open(PLAYER2_DATA_PATH.c_str());
-	//p1logical.open(PLAYER1_LOGICAL_DATA_PATH, std::ios_base::app);
-	//p2logical.open(PLAYER2_LOGICAL_DATA_PATH, std::ios_base::app);
-	std::string testLine;
-	while (std::getline(p1, testLine))
-	{
-		rotateBarParsePlayer1();
-		if (testLine.size() == longestGame)
-			p1logical << testLine << std::endl;
-	}
-	std::cout << "\nLogical moves extracted from player 1 data successfully!" << std::endl;
-	while (std::getline(p2, testLine))
-	{
-		rotateBarParsePlayer2();
-		if (testLine.size() == longestGame)
-			p1logical << testLine << std::endl;
-	}
-	std::cout << "\nLogical moves extracted from player 2 data successfully!" << std::endl;
-	p1.close();
-	p2.close();
-	p1logical.close();
-	p2logical.close();
-}
-*/
 
 void Engine::DataAnalysis(int choice)
 {
-//	longestGame = 1;
 	std::ifstream p1;
 	std::ifstream p2;
 	std::ofstream results;
-//	p1_logical.open(player1_logical_ata_path);
-//	p2_logical.open(PLAYER2_LOGICAL_DATA_PATH);
 	p1.open(std::data(PLAYER1_DATA_PATH));
 	p2.open(std::data(PLAYER2_DATA_PATH));
 	results.open(std::data(RESULTS_DATA_PATH));
@@ -294,19 +253,7 @@ void Engine::DataAnalysis(int choice)
 	results << std::endl;
 	p1.close();
 	p2.close();
-//	std::sort(player1moves.begin(), player1moves.end());
-//	std::sort(player2moves.begin(), player2moves.end());
-/*	std::ofstream p1unique;
-	std::ofstream p2unique;
-	p1unique.open(PLAYER1_UNIQUE_MOVES_DATA_PATH.c_str());
-	p2unique.open(PLAYER2_UNIQUE_MOVES_DATA_PATH.c_str());
-	for (std::vector<std::string>::iterator it = player1moves.begin(); it != player1moves.end(); it++)
-		p1unique << *it << std::endl;
-	for (std::vector<std::string>::iterator it = player2moves.begin(); it != player2moves.end(); it++)
-		p2unique << *it << std::endl;
-	p1unique.close();
-	p2unique.close();
-*/	int numberOfGamesPlayed = choice;
+	int numberOfGamesPlayed = choice;
 	std::cout << "-----------------------------------------------" << std::endl;
 	results << "-----------------------------------------------" << std::endl;
 	std::cout << "\nGame Analysis" << std::endl;
@@ -342,8 +289,6 @@ void Engine::DataAnalysis(int choice)
 		{
 			std::cout << i->first << " " << i->second << std::endl;
 			results << i->first << " " << i->second << std::endl;
-	//		if (i->size() > longestGame)
-	//			longestGame = i->size();
 		}
 		std::cout << std::endl;
 		results << std::endl;
@@ -353,8 +298,6 @@ void Engine::DataAnalysis(int choice)
 		{
 			std::cout << i->first << " " << i->second << std::endl;
 			results << i->first << " " << i->second << std::endl;
-//			if (i->size() > longestGame)
-//				longestGame = i->size();
 		}
 		std::cout << std::endl;
 		results << std::endl;
@@ -365,22 +308,28 @@ void Engine::DataAnalysis(int choice)
 		for (std::map<std::string, int>::iterator i = player1moves.begin(); i != player1moves.end(); i++)
 		{
             results << i->first << " " << i->second << std::endl;
-	//		if (i->size() > longestGame)
-	//			longestGame = i->size();
 		}
 		results << std::endl;
 		results << "The following moves led to Player 2's victory:" << std::endl;
 		for (std::map<std::string, int>::iterator i = player2moves.begin(); i != player2moves.end(); i++)
 		{
 			results << i->first << " " << i->second << std::endl;
-//			if (i->size() > longestGame)
-//				longestGame = i->size();
 		}
 		results << std::endl;
 	}
 	std::cout << "\nThe longest game was " << (longestGame / 4) << " moves.\n" << std::endl;
 	results << "The longest game was " << (longestGame / 4) << " moves.\n" << std::endl;
 	results.close();
+}
+
+void Engine::RotateBar(const std::string_view &message)
+{
+	barCount %= 4;
+
+	std::cout << '\r' << BarChars[barCount] << "  Please wait while " << std::data(message) << "...";
+	std::cout.flush();
+
+	++barCount;
 }
 
 void Engine::RotateBarParse()
@@ -492,14 +441,13 @@ void Engine::CreatePetersenGraph(int choice, int edgeWeight, bool watch, bool ra
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	this->ParseMasterData();
 	this->DataAnalysis(choice);
-	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();
 	std::clock_t timeDelta = endTime - startTime;
 	double timeInSeconds = timeDelta / (double)CLOCKS_PER_SEC;
-	int timeInDays = timeInSeconds / (60*60*24);
-	int timeInHours = (timeInSeconds / (60*60)) - (timeInDays * 24);
-	int timeInMinutes = (timeInSeconds / 60) - (timeInHours * 60);
-	int secondsRemaining = (int)(timeInSeconds - (timeInMinutes * 60));
+	int timeInDays = timeInSeconds / (Seconds::Day);
+	int timeInHours = (timeInSeconds / (Seconds::Hour)) - (timeInDays * Hours::Day);
+	int timeInMinutes = (timeInSeconds / Seconds::Minute) - (timeInHours * Seconds::Minute);
+	int secondsRemaining = (int)(timeInSeconds - (timeInMinutes * Seconds::Minute));
 	std::cout << "Benchmark:" << std::endl;
 	if (secondsRemaining == 0 && timeInMinutes == 0)
 	{
@@ -522,7 +470,6 @@ void Engine::CreatePetersenGraph(int choice, int edgeWeight, bool watch, bool ra
 
 void Engine::CreateCompleteGraph(int numGames, int numNodes, int edgeWeight, bool watch, bool random)
 {
-	//int numberOfNodes = numNodes;
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << numGames << std::endl;
     if (random == true)
@@ -540,15 +487,13 @@ void Engine::CreateCompleteGraph(int numGames, int numNodes, int edgeWeight, boo
     std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	this->ParseMasterData();
 	this->DataAnalysis(numGames);
-//	parsePlayerLogicalData();
-	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();
 	std::clock_t timeDelta = endTime - startTime;
 	double timeInSeconds = timeDelta / (double)CLOCKS_PER_SEC;
-	int timeInDays = timeInSeconds / (60*60*24);
-	int timeInHours = (timeInSeconds / (60*60)) - (timeInDays * 24);
-	int timeInMinutes = (timeInSeconds / 60) - (timeInHours * 60);
-	int secondsRemaining = (int)(timeInSeconds - (timeInMinutes * 60));
+	int timeInDays = timeInSeconds / (Seconds::Day);
+	int timeInHours = (timeInSeconds / (Seconds::Hour)) - (timeInDays * Hours::Day);
+	int timeInMinutes = (timeInSeconds / Seconds::Minute) - (timeInHours * Seconds::Minute);
+	int secondsRemaining = (int)(timeInSeconds - (timeInMinutes * Seconds::Minute));
 	std::cout << "Benchmark:" << std::endl;
 	if (secondsRemaining == 0 && timeInMinutes == 0)
 	{
@@ -571,7 +516,6 @@ void Engine::CreateCompleteGraph(int numGames, int numNodes, int edgeWeight, boo
 
 void Engine::CreateHypercubeGraph(int numGames, int edgeWeight, int dimensions, bool watch, bool random)
 {
-	//int numberOfNodes = numNodes;
 	std::clock_t startTime = clock();
 	std::cout << "Number of games to play: " << numGames << std::endl;
 	if (dimensions == 2)
@@ -622,15 +566,13 @@ void Engine::CreateHypercubeGraph(int numGames, int edgeWeight, int dimensions, 
 	std::cout << "\n\n-----------------------------------------------\n" << std::endl;
 	this->ParseMasterData();
 	this->DataAnalysis(numGames);
-	//parsePlayerLogicalData();
-	//Surface *a = new Surface(choice);
 	std::clock_t endTime = clock();
 	std::clock_t timeDelta = endTime - startTime;
 	double timeInSeconds = timeDelta / (double)CLOCKS_PER_SEC;
-	int timeInDays = timeInSeconds / (60*60*24);
-	int timeInHours = (timeInSeconds / (60*60)) - (timeInDays * 24);
-	int timeInMinutes = (timeInSeconds / 60) - (timeInHours * 60);
-	int secondsRemaining = (int)(timeInSeconds - (timeInMinutes * 60));
+	int timeInDays = timeInSeconds / (Seconds::Day);
+	int timeInHours = (timeInSeconds / (Seconds::Hour)) - (timeInDays * Hours::Day);
+	int timeInMinutes = (timeInSeconds / Seconds::Minute) - (timeInHours * Seconds::Minute);
+	int secondsRemaining = (int)(timeInSeconds - (timeInMinutes * Seconds::Minute));
 	std::cout << "Benchmark:" << std::endl;
 	if (secondsRemaining == 0 && timeInMinutes == 0)
 	{

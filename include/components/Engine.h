@@ -1,32 +1,26 @@
 #pragma once
 
-#include <string>
+#include <string_view>
 
-class Engine {
-public:
-	Engine();
-	int p1size;
-	int p2size;
-	int longestGame;
+class Engine
+{
+	public:
 
-private:
-	void printIntro();
-	void printStartMenu();
-	void startMenuChoices(int);
-	void createPetersenGraph(int, int, bool, bool);
-	void rotateBarParse();
-	void rotateBarParsePlayer1();
-	void rotateBarParsePlayer2();
-	void rotateBarAnalyzeP1();
-	void rotateBarAnalyzeP2();
-	int barCount;
-	int barCount1;
-	int barCount2;
-	void createCompleteGraph(int, int, int, bool, bool);
-	void createHypercubeGraph(int, int, int, bool, bool);
-	void parseMasterData();
-//	void parsePlayerLogicalData();
-	void dataAnalysis(int);
+		Engine();
+		int p1size;
+		int p2size;
+		int longestGame;
+
+	private:
+		static constexpr std::string_view MASTER_DATA_PATH = "output_data/master_data.txt";
+		static constexpr std::string_view PLAYER1_DATA_PATH = "output_data/player1_moves.txt";
+		static constexpr std::string_view PLAYER2_DATA_PATH = "output_data/player2_moves.txt";
+		static constexpr std::string_view RESULTS_DATA_PATH = "output_data/results.txt";
+		static constexpr std::string_view PLAYER1_UNIQUE_MOVES_DATA_PATH = "output_data/player1_unique_moves.txt";
+		static constexpr std::string_view PLAYER2_UNIQUE_MOVES_DATA_PATH = "output_data/player2_unique_moves.txt";
+
+		static constexpr char BarChars[] = {'\\', '|', '/', '-'};
+
 		void PrintIntro();
 		void PrintStartMenu();
 		void StartMenuChoices(int);
