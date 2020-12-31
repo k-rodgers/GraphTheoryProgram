@@ -1,5 +1,5 @@
-#include "Node.h"
-#include "Token.h"
+#include "components/Node.h"
+#include "components/Token.h"
 
 #include <iostream>
 

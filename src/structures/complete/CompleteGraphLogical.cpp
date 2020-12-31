@@ -14,10 +14,10 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "Token.h"
-#include "Node.h"
-#include "CompleteGraphLogical.h"
-#include "RandomEngine.h"
+#include "components/Token.h"
+#include "components/Node.h"
+#include "structures/complete/CompleteGraphLogical.h"
+#include "tools/RandomEngine.h"
 
 //	This is the .cc file for the CompleteGraphLogical object.
 const std::string MATRIX_RESULTS = "output_data/matrix_results.txt";

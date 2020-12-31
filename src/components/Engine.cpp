@@ -1,16 +1,16 @@
 #include <iostream>
-#include "PetersenGraphRandom.h"
-#include "CompleteGraphRandom.h"
-#include "Hypercube2Random.h"
-#include "Hypercube3Random.h"
-#include "Hypercube4Random.h"
-#include "Engine.h"
+#include "structures/petersen/PetersenGraphRandom.h"
+#include "structures/complete/CompleteGraphRandom.h"
+#include "structures/hypercube/Hypercube2Random.h"
+#include "structures/hypercube/Hypercube3Random.h"
+#include "structures/hypercube/Hypercube4Random.h"
+#include "components/Engine.h"
 
-#include "PetersenGraphLogical.h"
-#include "CompleteGraphLogical.h"
-#include "Hypercube2Logical.h"
-#include "Hypercube3Logical.h"
-#include "Hypercube4Logical.h"
+#include "structures/petersen/PetersenGraphLogical.h"
+#include "structures/complete/CompleteGraphLogical.h"
+#include "structures/hypercube/Hypercube2Logical.h"
+#include "structures/hypercube/Hypercube3Logical.h"
+#include "structures/hypercube/Hypercube4Logical.h"
 
 #include <string>
 #include <cstdio>

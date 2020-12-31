@@ -13,10 +13,10 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "Token.h"
-#include "Node.h"
-#include "Hypercube4Logical.h"
-#include "RandomEngine.h"
+#include "components/Token.h"
+#include "components/Node.h"
+#include "structures/hypercube/Hypercube4Logical.h"
+#include "tools/RandomEngine.h"
 
 /*
  This is the .cpp file for the Hypercube4Logical object.

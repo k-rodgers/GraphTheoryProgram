@@ -1,4 +1,4 @@
-// Hypercube3Random.cc
+// Hypercube3Logical.cc
 
 #include <list>
 #include <string>
@@ -13,19 +13,19 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "Token.h"
-#include "Node.h"
-#include "Hypercube3Random.h"
-#include "RandomEngine.h"
+#include "components/Token.h"
+#include "components/Node.h"
+#include "structures/hypercube/Hypercube3Logical.h"
+#include "tools/RandomEngine.h"
 
 /*
- This is the .cpp file for the Hypercube3Random object.
+ This is the .cpp file for the Hypercube3Logical object.
  */
 
-//Desc: Constructor for the Hypercube3Random object. Constructs a Hypercube3Random of Nodes,
+//Desc: Constructor for the Hypercube3Logical object. Constructs a Hypercube3Logical of Nodes,
 //		and creates edges between them.
 //Input: int i for the number of Nodes
-Hypercube3Random::Hypercube3Random(int i, int j, bool b, int k)
+Hypercube3Logical::Hypercube3Logical(int i, int j, bool b, int k)
 {
 	gameNumber = i;
 	edgeWeight = j;
@@ -44,9 +44,9 @@ Hypercube3Random::Hypercube3Random(int i, int j, bool b, int k)
 //analysis(numGames);
 
 
-//Desc: Destructor for the Hypercube3Random object. Deletes the nodeList
+//Desc: Destructor for the Hypercube3Logical object. Deletes the nodeList
 //		and frees up memory.
-Hypercube3Random::~Hypercube3Random()
+Hypercube3Logical::~Hypercube3Logical()
 {
 	while(!nodeList.empty()) {
 		delete nodeList.front();
@@ -58,9 +58,9 @@ Hypercube3Random::~Hypercube3Random()
 }
 
 //Desc: Creates the initial edges
-void Hypercube3Random::createInitialEdges()
+void Hypercube3Logical::createInitialEdges()
 {
-	if (edgeWeight == 0)
+    if (edgeWeight == 0)
     {
         std::list<Node*>::iterator iter1 = nodeList.begin();    // 1
         std::list<Node*>::iterator iter2 = nodeList.begin();
@@ -192,13 +192,13 @@ void Hypercube3Random::createInitialEdges()
 
 //Desc: Creates the initial Nodes
 //Input: int i, which is the name of the Node
-void Hypercube3Random::createInitialNodes(int i)
+void Hypercube3Logical::createInitialNodes(int i)
 {
 	Node *n = new Node(i);
 	nodeList.push_back(n);
 }
 
-void Hypercube3Random::removeEdge()
+void Hypercube3Logical::removeEdge()
 {
 	int n1 = 0;
 	int n2 = 0;
@@ -224,7 +224,7 @@ void Hypercube3Random::removeEdge()
 }
 
 //Desc: Prints out the current version of the program the user is running
-void Hypercube3Random::printVersion()
+void Hypercube3Logical::printVersion()
 {
 	std::cout << std::endl;
 	std::cout << "Version: 0.2 Beta" << std::endl;
@@ -232,7 +232,7 @@ void Hypercube3Random::printVersion()
 	std::cout << "Date of Last Revision: 5/4/14 23:30" << std::endl;
 }
 
-void Hypercube3Random::print()
+void Hypercube3Logical::print()
 {
 	std::cout << "This surface contains the following nodes and edges: " << std::endl;
 	std::list<Node*>::iterator iter;
@@ -242,7 +242,7 @@ void Hypercube3Random::print()
 	}
 }
 
-int Hypercube3Random::getRandomNumber(int size)
+int Hypercube3Logical::getRandomNumber(int size)
 {
 
 	RandomEngine *rand = RandomEngine::instance();
@@ -254,7 +254,7 @@ int Hypercube3Random::getRandomNumber(int size)
 //This is the method that plays the game
 //The master data is sent to the file /output_data/mater_data.txt
 
-void Hypercube3Random::rotateBar()
+void Hypercube3Logical::rotateBar()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -273,7 +273,7 @@ void Hypercube3Random::rotateBar()
 	return;
 }
 
-int Hypercube3Random::getRandomEdge(int size)
+int Hypercube3Logical::getRandomEdge(int size)
 {
 
 	RandomEngine *rand = RandomEngine::instance();
@@ -282,7 +282,7 @@ int Hypercube3Random::getRandomEdge(int size)
 	return randNum;
 }
 
-void Hypercube3Random::game()
+void Hypercube3Logical::game()
 {
     /*    std::cout << edgeWeight << std::endl;
      for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)

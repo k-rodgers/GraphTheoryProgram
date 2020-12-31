@@ -11,10 +11,10 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "Token.h"
-#include "Node.h"
-#include "PetersenGraphLogical.h"
-#include "RandomEngine.h"
+#include "components/Token.h"
+#include "components/Node.h"
+#include "structures/petersen/PetersenGraphLogical.h"
+#include "tools/RandomEngine.h"
 
 /*
  This is the .cpp file for the PetersenGraphLogical object.

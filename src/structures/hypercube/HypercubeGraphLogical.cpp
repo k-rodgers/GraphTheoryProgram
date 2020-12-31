@@ -14,10 +14,10 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "Token.h"
-#include "Node.h"
-#include "HypercubeGraphLogical.h"
-#include "RandomEngine.h"
+#include "components/Token.h"
+#include "components/Node.h"
+#include "structures/hypercube/HypercubeGraphLogical.h"
+#include "tools/RandomEngine.h"
 
 /*
  This is the .cpp file for the HypercubeGraphLogical object.

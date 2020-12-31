@@ -14,10 +14,10 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "Token.h"
-#include "Node.h"
-#include "CompleteGraphRandom.h"
-#include "RandomEngine.h"
+#include "components/Token.h"
+#include "components/Node.h"
+#include "structures/complete/CompleteGraphRandom.h"
+#include "tools/RandomEngine.h"
 
 //	This is the .cc file for the CompleteGraphRandom object.
 

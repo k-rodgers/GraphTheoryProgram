@@ -1,3 +1,5 @@
+// Hypercube2Random.cc
+
 #include <list>
 #include <string>
 #include <iostream>
@@ -11,26 +13,26 @@
 #include <time.h>
 #include <stdio.h>
 
-#include "Token.h"
-#include "Node.h"
-#include "PetersenGraphRandom.h"
-#include "RandomEngine.h"
+#include "components/Token.h"
+#include "components/Node.h"
+#include "structures/hypercube/Hypercube2Random.h"
+#include "tools/RandomEngine.h"
 
 /*
- This is the .cpp file for the PetersenGraphRandom object.
+ This is the .cpp file for the Hypercube2Random object.
  */
 
-//Desc: Constructor for the PetersenGraphRandom object. Constructs a PetersenGraphRandom of Nodes,
+//Desc: Constructor for the Hypercube2Random object. Constructs a Hypercube2Random of Nodes,
 //		and creates edges between them.
 //Input: int i for the number of Nodes
-PetersenGraphRandom::PetersenGraphRandom(int i, int j, bool b, int k)
+Hypercube2Random::Hypercube2Random(int i, int j, bool b, int k)
 {
 	gameNumber = i;
 	edgeWeight = j;
 	totalGames = k;
 	watch = b;
 	nodeNameCount = 0;
-	for (int l = 1; l <= 10; l++)
+	for (int l = 1; l <= 4; l++)
 	{
 		createInitialNodes(l);
 		nodeNameCount++;
@@ -42,9 +44,9 @@ PetersenGraphRandom::PetersenGraphRandom(int i, int j, bool b, int k)
 //analysis(numGames);
 
 
-//Desc: Destructor for the PetersenGraphRandom object. Deletes the nodeList
+//Desc: Destructor for the Hypercube2Random object. Deletes the nodeList
 //		and frees up memory.
-PetersenGraphRandom::~PetersenGraphRandom()
+Hypercube2Random::~Hypercube2Random()
 {
 	while(!nodeList.empty()) {
 		delete nodeList.front();
@@ -56,7 +58,7 @@ PetersenGraphRandom::~PetersenGraphRandom()
 }
 
 //Desc: Creates the initial edges
-void PetersenGraphRandom::createInitialEdges()
+void Hypercube2Random::createInitialEdges()
 {
 	if (edgeWeight == 0)
     {
@@ -64,79 +66,18 @@ void PetersenGraphRandom::createInitialEdges()
         std::list<Node*>::iterator iter2 = nodeList.begin();
         std::advance(iter2, 1);
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        (*iter2)->setEdge(*iter1, getRandomNumber(10));
+        std::advance(iter1, 1);
         std::advance(iter2, 1);
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        iter2 = nodeList.begin();
+        (*iter2)->setEdge(*iter1, getRandomNumber(10));
         std::advance(iter1, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
         std::advance(iter2, 1);
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
+        (*iter2)->setEdge(*iter1, getRandomNumber(10));
+        iter1 = nodeList.begin();
         (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 6);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, getRandomNumber(10));
+        (*iter2)->setEdge(*iter1, getRandomNumber(10));
     }
     else
     {
@@ -144,91 +85,30 @@ void PetersenGraphRandom::createInitialEdges()
         std::list<Node*>::iterator iter2 = nodeList.begin();
         std::advance(iter2, 1);
         (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
+        (*iter2)->setEdge(*iter1, edgeWeight);
+        std::advance(iter1, 1);
         std::advance(iter2, 1);
         (*iter1)->setEdge(*iter2, edgeWeight);
-        iter2 = nodeList.begin();
+        (*iter2)->setEdge(*iter1, edgeWeight);
         std::advance(iter1, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
         std::advance(iter2, 1);
         (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
+        (*iter2)->setEdge(*iter1, edgeWeight);
+        iter1 = nodeList.begin();
         (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 6);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 7);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 3);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter1, 1);
-        iter2 = nodeList.begin();
-        std::advance(iter2, 4);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 2);
-        (*iter1)->setEdge(*iter2, edgeWeight);
-        std::advance(iter2, 1);
-        (*iter1)->setEdge(*iter2, edgeWeight);
+        (*iter2)->setEdge(*iter1, edgeWeight);
     }
 }
 
 //Desc: Creates the initial Nodes
 //Input: int i, which is the name of the Node
-void PetersenGraphRandom::createInitialNodes(int i)
+void Hypercube2Random::createInitialNodes(int i)
 {
 	Node *n = new Node(i);
 	nodeList.push_back(n);
 }
 
-void PetersenGraphRandom::removeEdge()
+void Hypercube2Random::removeEdge()
 {
 	int n1 = 0;
 	int n2 = 0;
@@ -254,7 +134,7 @@ void PetersenGraphRandom::removeEdge()
 }
 
 //Desc: Prints out the current version of the program the user is running
-void PetersenGraphRandom::printVersion()
+void Hypercube2Random::printVersion()
 {
 	std::cout << std::endl;
 	std::cout << "Version: 0.2 Beta" << std::endl;
@@ -262,7 +142,7 @@ void PetersenGraphRandom::printVersion()
 	std::cout << "Date of Last Revision: 5/4/14 23:30" << std::endl;
 }
 
-void PetersenGraphRandom::print()
+void Hypercube2Random::print()
 {
 	std::cout << "This surface contains the following nodes and edges: " << std::endl;
 	std::list<Node*>::iterator iter;
@@ -272,7 +152,7 @@ void PetersenGraphRandom::print()
 	}
 }
 
-int PetersenGraphRandom::getRandomNumber(int size)
+int Hypercube2Random::getRandomNumber(int size)
 {
 
 	RandomEngine *rand = RandomEngine::instance();
@@ -284,7 +164,7 @@ int PetersenGraphRandom::getRandomNumber(int size)
 //This is the method that plays the game
 //The master data is sent to the file /output_data/mater_data.txt
 
-void PetersenGraphRandom::rotateBar()
+void Hypercube2Random::rotateBar()
 {
 	barCount++;
 	char barspin[4] = {'\\', '|', '/', '-'};
@@ -303,7 +183,7 @@ void PetersenGraphRandom::rotateBar()
 	return;
 }
 
-int PetersenGraphRandom::getRandomEdge(int size)
+int Hypercube2Random::getRandomEdge(int size)
 {
 
 	RandomEngine *rand = RandomEngine::instance();
@@ -312,9 +192,9 @@ int PetersenGraphRandom::getRandomEdge(int size)
 	return randNum;
 }
 
-void PetersenGraphRandom::game()
+void Hypercube2Random::game()
 {
-    /*    std::cout << edgeWeight << std::endl;
+	/*    std::cout << edgeWeight << std::endl;
      for (std::list<Node*>::iterator iter = nodeList.begin(); iter != nodeList.end(); iter++)
      std::cout << (*iter)->getDegree() << std::endl;
      */    std::ofstream master_data;
@@ -429,3 +309,41 @@ void PetersenGraphRandom::game()
         master_data.close();
     }
 }
+
+/*
+
+while (true)
+	{
+        nextMove = getRandomNumber(t->getTokenLocation()->getEdgeListSize()); // inside () returns an int the size of possible nodes to go to
+        nextMoveNode = t->getTokenLocation()->getNodeAtElement(nextMove);     // sets node at based in this number
+        edgeSize = t->getTokenLocation()->getWeight(nextMoveNode);
+        nextRandomWeight = getRandomEdge(edgeSize);
+		if (nextRandomWeight > 0)
+        {
+        	(t->getTokenLocation())->setEdge(nextMoveNode, nextMoveNode->getWeight(t->getTokenLocation()) - nextRandomWeight);
+	        (nextMoveNode)->setEdge(t->getTokenLocation(), t->getTokenLocation()->getWeight(nextMoveNode) - nextRandomWeight);
+    	    std::cout << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << nextRandomWeight << " - " << (nextMoveNode)->getName() << std::endl;
+	        //master_data << "Player " << t->getCurrentPlayerTurn() << " removed edge " << (t->getTokenLocation())->getName() << " - " << (nextMoveNode)->getName() << std::endl;
+    	    t->setPlayerTurn();
+	        t->setTokenLocation(nextMoveNode);
+	    }
+		else if (nextRandomWeight == 0)
+	    {
+	    	t->getTokenLocation()->destroyEdge(nextMoveNode);
+	    	nextMoveNode->destroyEdge(t->getTokenLocation());
+	    }
+        if (t->getTokenLocation()->getEdgeListSize() == 0)
+		{
+			//moves += std::to_string((t->getTokenLocation())->getName());
+			t->setPlayerTurn();
+			std::cout << std::endl;
+			//master_data << "Player " << t->getCurrentPlayerTurn() << " wins!\n";
+			master_data << t->getCurrentPlayerTurn() << std::endl;
+			std::cout << "Player " << t->getCurrentPlayerTurn() << " wins!" << std::endl;
+			std::cout << std::endl;
+			break;
+		}
+		master_data << (t->getTokenLocation())->getName() << "-";
+	}
+}
+*/
