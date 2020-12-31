@@ -27,10 +27,26 @@ class Engine
 		void CreatePetersenGraph(int, int, bool, bool);
 		void RotateBar(const std::string_view &message);
 		void RotateBarParse();
-		void RotateBarParsePlayer1();
-		void RotateBarParsePlayer2();
-		void RotateBarAnalyzeP1();
-		void RotateBarAnalyzeP2();
+		inline void RotateBarParsePlayer1()
+		{
+			this->RotateBar("  Please wait while Player 1's logical moves are extracted...");
+		}
+
+		inline void RotateBarParsePlayer2()
+		{
+			this->RotateBar("  Please wait while Player 2's logical moves are extracted...");
+		}
+
+		inline void RotateBarAnalyzeP1()
+		{
+			this->RotateBar("  Please wait while Player 1's data is analyzed...");
+		}
+
+		inline void RotateBarAnalyzeP2()
+		{
+			this->RotateBar("  Please wait while Player 2's data is analyzed...");
+		}
+
 		int barCount;
 		int barCount1;
 		int barCount2;

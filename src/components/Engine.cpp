@@ -326,7 +326,7 @@ void Engine::RotateBar(const std::string_view &message)
 {
 	barCount %= 4;
 
-	std::cout << '\r' << BarChars[barCount] << "  Please wait while " << std::data(message) << "...";
+	std::cout << '\r' << BarChars[barCount] << std::data(message);
 	std::cout.flush();
 
 	++barCount;
@@ -334,92 +334,7 @@ void Engine::RotateBar(const std::string_view &message)
 
 void Engine::RotateBarParse()
 {
-	barCount++;
-	char barspin[4] = {'\\', '|', '/', '-'};
-	int whichOne;
-	whichOne = barCount % 4;
-	if (whichOne == 3)
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while the data is sorted...";
-	}
-	else
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while the data is sorted...";
-	}
-	std::cout.flush();
-	return;
-}
-
-void Engine::RotateBarParsePlayer1()
-{
-	barCount++;
-	char barspin[4] = {'\\', '|', '/', '-'};
-	int whichOne;
-	whichOne = barCount % 4;
-	if (whichOne == 3)
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 1's logical moves are extracted...";
-	}
-	else
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 1's logical moves are extracted...";
-	}
-	std::cout.flush();
-	return;
-}
-
-void Engine::RotateBarParsePlayer2()
-{
-	barCount++;
-	char barspin[4] = {'\\', '|', '/', '-'};
-	int whichOne;
-	whichOne = barCount % 4;
-	if (whichOne == 3)
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 2's logical moves are extracted...";
-	}
-	else
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 2's logical moves are extracted...";
-	}
-	std::cout.flush();
-	return;
-}
-
-void Engine::RotateBarAnalyzeP1()
-{
-	barCount++;
-	char barspin[4] = {'\\', '|', '/', '-'};
-	int whichOne;
-	whichOne = barCount % 4;
-	if (whichOne == 3)
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 1's data is analyzed...";
-	}
-	else
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 1's data is analyzed...";
-	}
-	std::cout.flush();
-	return;
-}
-
-void Engine::RotateBarAnalyzeP2()
-{
-	barCount++;
-	char barspin[4] = {'\\', '|', '/', '-'};
-	int whichOne;
-	whichOne = barCount % 4;
-	if (whichOne == 3)
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 2's data is analyzed...";
-	}
-	else
-	{
-		std::cout << '\r' << barspin[whichOne] << "  Please wait while Player 2's data is analyzed...";
-	}
-	std::cout.flush();
-	return;
+	this->RotateBar("  Please wait while the data is sorted...");
 }
 
 void Engine::CreatePetersenGraph(int choice, int edgeWeight, bool watch, bool random)
