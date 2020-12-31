@@ -20,3 +20,5 @@ rm main.o
 popd > /dev/null
 g++ -I./include/ -std=c++17 -g build/*.o src/main.cpp -luuid -o gtp
 mkdir -p output_data
+
+ls -l gtp
